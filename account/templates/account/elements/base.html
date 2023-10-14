@@ -1,0 +1,107 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en" dir="lfr">
+  
+<head>
+  <meta charset="utf-8">
+  <title>
+    {% block title %}{% endblock title %}
+  </title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <link rel="stylesheet" href="{% static "assets/fonts/css/NotoArabic.css" %}">
+  <link rel="stylesheet" href="{% static "assets/fonts/css/OpenSans.css" %}">
+  <link href="{% static "assets/css/login.css" %}" rel="stylesheet">
+  <link href="{% static "assets/css/login_header.rtl.css" %}" id="hsoubHeaderCSS" type="text/css" rel="stylesheet">
+
+  <link rel="stylesheet" href="{% static "assets/css/all.min.css" %}">
+  <script src="{% static "assets/js/all.min.js" %}"></script>
+
+  <link rel="stylesheet" type="text/css" href="{% static "toastify/css/toastify.min.css" %}">
+  <script type="text/javascript" src="{% static "toastify/js/toastify.js" %}"></script>
+
+</head>
+
+<body class="hsoub-header-exist hsoub hsoub-header-visible">
+  <header class="hsoub-header" style="">
+    <div class="hsoub-box">
+      <a href="{% url "login" %}" class="hsoub-logo">
+        <img class="hsoub-logo-img hsoub--visible-h hsoub-desktop hsoub-tablet hsoub-mobile" src="{% static "assets/images/logos/hsoub.png" %}">
+      </a>
+      
+      <ul class="hsoub-menu hsoub-menu--is-minor">
+        <li class="hsoub-menu-item hsoub--visible-h hsoub-desktop hsoub-tablet ">
+          <a class="hsoub-menu-item-link  hsoub-menu-item-link--is-button" href="{% url "login" %}">
+            <i class="hsoub-menu-item-link-icon fa fa-sign-in"></i>
+            <span>{% trans "Login" %}</span>
+          </a>
+        </li>
+        <li class="hsoub-menu-item hsoub--visible-h hsoub-desktop hsoub-tablet hsoub-mobile">
+          <a class="hsoub-menu-item-link  hsoub-menu-item-link--is-button" href="{% url "register" %}">
+            <i class="hsoub-menu-item-link-icon fa fa-user-plus"></i>
+            <span>{% trans "Register" %}</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </header>
+  <div class="hsoub-container">
+    <div class="hsoub-content">
+      <div id="root" class="wrapper">
+        <div class="container-fluid container--small">
+          <div class="main main-spacer-wide">
+
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.tags == "error" %}
+                        <script>
+                            Toastify({
+                                text: "{{ message }}",
+                                duration: 3000,
+                                newWindow: true,
+                                close: true,
+                                gravity: "top",
+                                position: "right",
+                                stopOnFocus: true, 
+                                style: {
+                                    background: "linear-gradient(to right, #b02f00, #96572d)",
+                                },
+                                onClick: function(){} // Callback after click
+                            }).showToast();
+                        </script>
+                    {% elif message.tags == "success" %}
+                        <script>
+                            Toastify({
+                                text: "{{ message }}",
+                                duration: 3000,
+                                newWindow: true,
+                                close: true,
+                                gravity: "top", 
+                                position: "right", 
+                                stopOnFocus: true, 
+                                style: {
+                                    background: "linear-gradient(to right, #00b09b, #70962d)",
+                                },
+                                onClick: function(){} // Callback after click
+                            }).showToast();
+                        </script>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+
+            {% block form %}
+            {% endblock form %}
+
+          </div>
+          <footer class="footer">
+            <p class="copyrights">{% trans "© 2023 Hsoub. All rights are saved." %}</p>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
+

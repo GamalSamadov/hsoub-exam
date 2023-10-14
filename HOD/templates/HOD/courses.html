@@ -1,0 +1,39 @@
+{% extends "HOD/elements/base.html" %}
+
+{% load static %}
+
+{% block title %}
+  Admin - Courses
+{% endblock title %}
+
+{% block content %}
+
+<p>
+    <a href="{% url "courses" %}">Courses</a> / 
+  </p>
+
+  <a href="{% url "add_course" %}" class="btn btn-primary mb-4">Add Course</a>
+
+  <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">All</span> Courses</h4>
+
+  <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+    {% for course in courses %}
+      <div class="col">
+        <div class="card h-100">
+          <img class="card-img-top" src="{{ course.pic.url }}" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title">{{ course.title }}</h5>
+            <p class="card-text">
+              {{ course.description }}
+            </p>
+            
+          </div>
+          <div class="card-footer">
+            <a href="{% url "course_profile" course.id %}" class="btn btn-info mt-3">More</a>
+          </div>
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+
+{% endblock content %}

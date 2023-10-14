@@ -1,0 +1,52 @@
+{% extends "account/elements/base.html" %}
+
+{% load i18n %}
+
+{% block title %}
+  Hsoub - Login 
+{% endblock title %}
+
+{% block form %}
+
+  <h1>{% trans "Login" %}</h1>
+
+  {% comment %} <div>
+  <div class="mat--lg mab--lg">
+    <div class="row">
+      <div class="col-md-6 col-xs-12">
+        <a href="#" class="btn btn-block provider provider--google">
+          <span class="fa fa-google fa-2x"></span> باستخدام جوجل
+        </a>
+      </div>
+      <div class="col-md-6 col-xs-12">
+        <a href="#" class="btn btn-block provider provider--office365">
+          <span class="fa fa-windows fa-2x"></span> 
+          باستخدام مايكروسوفت
+        </a>
+      </div> 
+    </div>
+  </div>
+  <hr class="hr-text" data-content="أو">
+  </div>
+  {% endcomment %}
+
+  <form method="POST" action="{% url "login" %}">
+    <div class="form-group">
+      <label>{% trans "Email" %}</label>
+      <input class="form-control" placeholder="{% trans "Enter your email..." %}" type="email" name="email">
+    </div>
+    <div class="form-group">
+      <label>{% trans "Password" %}</label>
+      <input class="form-control" placeholder="{% trans "Enter your password... " %}" type="password" name="password">
+    </div>
+    <div class="row">
+      <div class="col-md-4 col-xs-12">
+        <div class="form-group">
+          <button type="submit" class="btn btn-ghost btn-primary btn-block">{% trans "Login" %}</button>
+        </div>
+      </div>
+    </div>
+  </form>
+
+{% endblock form %}
+ 

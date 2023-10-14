@@ -1,0 +1,186 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      {% block title %}
+
+      {% endblock %}
+    </title>
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-D6HLCHN9ES"></script>
+    <script>
+      window.dataLayer = window.dataLayer || []
+      function gtag() {
+        dataLayer.push(arguments)
+      }
+      gtag('js', new Date())
+      
+      gtag('config', 'G-D6HLCHN9ES')
+    </script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="{% static 'assets/css/framework.css' %}" media="all" />
+
+    <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}" media="all" />
+    <link rel="stylesheet" href="{% static 'assets/css/flags.css' %}" media="all" />
+
+    <link rel="stylesheet" href="{% static 'assets/css/bundle.css' %}" media="all" />
+
+    <link rel="stylesheet" href="{% static 'assets/css/all.min.css' %}" />
+    <script src="{% static 'assets/js/all.min.js' %}"></script>
+
+    <link rel="stylesheet" href="{% static 'assets/css/main_custom.css' %}" media="all" />
+
+    <link rel="shortcut icon" href="{% static 'assets/images/logos/icon.ico' %}" type="image/x-icon" />
+
+    <link rel="stylesheet" type="text/css" href="{% static 'toastify/css/toastify.min.css' %}" />
+    <script type="text/javascript" src="{% static 'toastify/js/toastify.js' %}"></script>
+
+    <script src="https://js.stripe.com/v3"></script>
+
+    {% block custom_head %}
+    {% endblock custom_head %}
+  </head>
+
+  <body class="ipsApp ipsApp_front hsoubAcademy ipsJS_has ipsClearfix ipsApp_noTouch ipsLayout_sidebarUsed" data-controller="core.front.core.app" data-message="" data-pageapp="" data-pagelocation="front" data-pagemodule="" data-pagecontroller="" style="padding: 0;">
+    <style>
+      .banner-logo img {
+        height: 75px;
+        padding-bottom: 10px;
+      }
+    </style>
+
+    <a href="#ipsLayout_mainArea" class="ipsHide" title="{% trans 'Go to the main content' %}" accesskey="m">{% trans 'Go To The Content' %}</a>
+
+    {% include 'academy/elements/header.html' %}
+
+    <main id="ipsLayout_body" class="ipsLayout_container">
+      <div id="ipsLayout_contentArea">
+        <div id="ipsLayout_contentWrapper">
+          {% if messages %}
+            {% for message in messages %}
+              {% if message.tags == 'error' %}
+                <script>
+                  Toastify({
+                    text: '{{ message }}',
+                    duration: 3000,
+                    newWindow: true,
+                    close: true,
+                    gravity: 'top',
+                    position: 'right',
+                    stopOnFocus: true,
+                    style: {
+                      background: 'linear-gradient(to right, #b02f00, #96572d)'
+                    },
+                    onClick: function () {} // Callback after click
+                  }).showToast()
+                </script>
+              {% elif message.tags == 'success' %}
+                <script>
+                  Toastify({
+                    text: '{{ message }}',
+                    duration: 3000,
+                    newWindow: true,
+                    close: true,
+                    gravity: 'top',
+                    position: 'right',
+                    stopOnFocus: true,
+                    style: {
+                      background: 'linear-gradient(to right, #00b09b, #70962d)'
+                    },
+                    onClick: function () {} // Callback after click
+                  }).showToast()
+                </script>
+              {% endif %}
+            {% endfor %}
+          {% endif %}
+
+          {% block content %}
+
+          {% endblock %}
+        </div>
+      </div>
+    </main>
+
+    {% include 'academy/elements/footer.html' %}
+
+    <script type="text/javascript">
+      var ipsDebug = false
+      
+      var CKEDITOR_BASEPATH = '//academy.hsoub.com/applications/core/interface/ckeditor/ckeditor/'
+      
+      var ipsSettings = {
+        cookie_path: '/',
+      
+        cookie_prefix: 'k',
+      
+        cookie_ssl: true,
+      
+        essential_cookies: ['oauth_authorize', 'member_id', 'login_key', 'clearAutosave', 'lastSearch', 'device_key', 'IPSSessionFront', 'loggedIn', 'noCache', 'hasJS', 'cookie_consent', 'cookie_consent_optional', 'language', 'forumpass_*', 'cm_reg', 'location', 'currency', 'guestTransactionKey'],
+        upload_imgURL: '',
+        message_imgURL: '',
+        notification_imgURL: '',
+        csrfKey: '61bf4f871d4b9de35c437e5ae01f46d0',
+        antiCache: '29b3b443b81695803921',
+        jsAntiCache: '29b3b443b81696102407',
+        disableNotificationSounds: true,
+        useCompiledFiles: true,
+        links_external: true,
+        memberID: 0,
+        lazyLoadEnabled: false,
+        googleAnalyticsEnabled: true,
+        matomoEnabled: false,
+        viewProfiles: true,
+        mapProvider: 'none',
+        mapApiKey: '',
+        pushPublicKey: 'BCLuVDJ0V4gpkFR02QFyfGGI8BUtc5M2I_nUVWAhuuVTIcGq8N6-ODWLMHyxRRqKprKwOdu5gTpnu4p_wk0ES-0',
+        relativeDates: true
+      }
+      
+      ipsSettings['maxImageDimensions'] = {
+        width: 900,
+        height: 600
+      }
+    </script>
+
+
+    <script type="text/javascript" src="{% static 'assets/js/bootstrap.js' %}" data-ips=""></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{% static 'assets/js/main.js' %}"></script>
+
+    <script src="{% static 'assets/js/stripe.js' %}"></script>
+    
+    {% block custom_script %}
+    {% endblock custom_script %}
+
+    <ul id="elUserLink_menu" class="ipsMenu ipsMenu_normal ipsHide ipsMenu_bottomLeft" style="left: 52.5px; top: 52.0625px; position: absolute; z-index: 5250; opacity: 1; display: none;" animating="false">
+      <li class="ipsMenu_title">
+        {% trans 'Content' %}
+      </li>
+
+      <li class="ipsMenu_item" data-menuitem="profile">
+        <a href="#" title="{% trans 'Profile' %}">{% trans 'Profile' %}</a>
+      </li>
+
+      <li class="ipsMenu_title">
+        {% trans 'Settings' %}
+      </li>
+
+      <li class="ipsMenu_sep">
+        <hr />
+      </li>
+
+      <li class="ipsMenu_item" data-menuitem="signout">
+        <a href="{% url 'logout' %}">{% trans 'Logout' %}</a>
+      </li>
+    </ul>
+  </body>
+</html>

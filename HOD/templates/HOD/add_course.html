@@ -1,0 +1,55 @@
+{% extends "HOD/elements/base.html" %}
+
+{% block title %}
+  Admin - Add Staff
+{% endblock title %}
+
+
+{% block content %}
+
+  <p>
+    <a href="{% url "courses" %}">Courses</a> / <a href="{% url "add_course" %}">Add Course</a>
+  </p>
+
+  <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Add </span> Course</h4>
+  <div class="row">
+
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-body demo-vertical-spacing demo-only-element">
+          
+          <form action="{% url "add_course" %}" method="POST" enctype="multipart/form-data"> 
+            {% csrf_token %}
+
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Title hare..." name="title" required>
+              <span class="input-group-text" id="email-addon">Title</span>
+            </div>
+
+            <div class="input-group mb-3">
+              <span class="input-group-text">Description</span>
+              <textarea class="form-control" aria-label="description" placeholder="Description..." spellcheck="false" data-ms-editor="true" name="description" required></textarea>
+            </div>
+
+            <div class="input-group mb-3">
+              <span class="input-group-text">$</span>
+              <input type="number" class="form-control" placeholder="Amount..." aria-label="Amount (to the nearest dollar)" spellcheck="false" data-ms-editor="true" name="price" required>
+              <span class="input-group-text">Price</span>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label" for="pic">Main Picture</label>
+              <input type="file" class="form-control" id="pic" name="pic" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+{% endblock content %}
+
+

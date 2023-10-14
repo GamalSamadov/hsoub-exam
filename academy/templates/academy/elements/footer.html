@@ -1,0 +1,23 @@
+{% load static %}
+{% load i18n %}
+
+<footer>
+  <div class="middle-footer">
+    <div class="container main-container">
+      <div class="row">
+        <div class="col-md-6">
+          <p class="copyrights">
+            © <span id="cr-year">2023</span> {% trans "Hassoub Academy is one of the company's projects Hsoub. All rights are saved." %}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+<script>
+  // add Copyright year
+  window.addEventListener("DOMContentLoaded", function (event) {
+    document.querySelector("#cr-year").innerText =
+      new Date().getFullYear();
+  });
+</script>

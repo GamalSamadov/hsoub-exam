@@ -1,0 +1,63 @@
+{% extends "HOD/elements/base.html" %}
+
+{% load static %}
+
+{% block title %}
+  Admin - Member profile
+{% endblock title %}
+
+{% block content %}
+
+<div class="row">
+  <div class="col-md-12">
+
+   <p>
+    <a href="{% url "members" %}">Members</a> / <a href="{% url "member_profile" member.id %}">{{ member.first_name }} {{ member.last_name }}</a>
+   </p>
+
+    <div class="card mb-4">
+      <h5 class="card-header">Profile Details</h5>
+      <!-- Account -->
+      <div class="card-body">
+        {% if member.member.profile_pic %}
+          <img src="{{ member.member.profile_pic.url }}" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar">
+        {% else %}
+          <img src="{% static "dashboard/img/icons/user/user_icon.png" %}" alt="user-avatar" class="d-block rounded" height="100" width="100" id="uploadedAvatar">
+        {% endif %}
+      </div>
+
+      <hr class="my-0">
+
+      <div class="card-body">
+        
+        <div class="row">
+
+          <span class="mb-3">Full name:</span>
+          <p>{{ member.first_name }} {{ member.last_name }}</p>
+
+          <hr class="my-0">
+
+          <span class="mb-3 mt-3">Email:</span>
+          <p>{{ member.email }}</p>
+
+          <hr class="my-0">
+
+          <span class="mb-3 mt-3">Username:</span>
+          <p>{{ member.username }}</p>
+
+        </div>
+        <div class="mt-2">
+          <a href="{% url 'edit_member' member.id %}">
+            <button type="button" class="btn btn-success me-2">Edit</button>
+          </a>
+        </div>
+      </div>
+        <!-- /Account -->
+    </div>
+  </div>
+</div>
+
+    
+
+{% endblock content %}
+

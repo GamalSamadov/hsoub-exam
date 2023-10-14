@@ -1,0 +1,61 @@
+{% extends "HOD/elements/base.html" %}
+
+{% load static %}
+
+{% block title %}
+  Admin - Staffs
+{% endblock title %}
+
+{% block content %}
+
+  <p>
+    <a href="{% url "staffs" %}">Staffs</a> / 
+  </p>
+
+  <a href="{% url "add_staff" %}" class="btn btn-primary mb-4">Add Staff</a>
+
+  <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">All </span> Staffs</h4>
+  
+  <div class="card">
+    <div class="table-responsive text-nowrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>User Pic</th>
+            <th>Full Name</th>
+            <th>Email</th>
+            <th>Username</th>
+          </tr>
+        </thead>
+        <tbody class="table-border-bottom-0">
+          {% for staff in staffs %}
+          
+            <tr>
+              <td>
+                <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                  <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" title="" data-bs-original-title="{{ staff.user.first_name }} {{ staff.user.last_name }}">
+                    <a href="{% url "staff_profile" staff.user.id %}">
+                      {% if staff.profile_pic %}
+                        <img src="{{ staff.profile_pic.url }}" alt="Avatar" class="rounded-circle">
+                      {% else %}
+                        <img src="{% static "dashboard/img/icons/user/user_icon.png" %}" alt="Avatar" class="rounded-circle">
+                      {% endif %}
+                    </a>
+                  </li>
+              </td>
+              <td>
+                <a href="{% url "staff_profile" staff.user.id %}">
+                  <strong>{{ staff.user.first_name }} {{ staff.user.last_name }}</strong>
+                </a>
+              </td>
+              <td>{{ staff.user.email }}</td>
+              <td><span class="badge bg-label-primary me-1">@{{ staff.user.username }}</span></td>
+            </tr>
+          
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+{% endblock content %}

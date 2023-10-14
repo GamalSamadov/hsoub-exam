@@ -1,0 +1,39 @@
+{% extends "HOD/elements/base.html" %}
+
+{% block title %}
+  Admin - Add Course Subtitle
+{% endblock title %}
+
+
+{% block content %}
+
+  <p>
+    <a href="{% url "courses" %}">Courses</a> / <a href="{% url "course_profile" course.id %}">{{ course.title }}</a> / <a href="{% url "add_course_subtitle" course.id %}">Add Subtitle</a>
+  </p>
+
+  <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Add </span> Subtitle</h4>
+  <div class="row">
+
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-body demo-vertical-spacing demo-only-element">
+          
+          <form action="{% url "add_course_subtitle" course.id %}" method="POST" enctype="multipart/form-data"> 
+            {% csrf_token %}
+
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Subtitle hare..." name="subtitle" required>
+              <span class="input-group-text" id="email-addon">Subtitle</span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+{% endblock content %}
+
+

@@ -1,0 +1,431 @@
+{% extends "academy/elements/base.html" %}
+
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+{% trans "Hsoub Academy" %}
+{% endblock title %}
+
+{% block content %}
+
+<div id="ipsLayout_mainArea">
+
+  <main id="bootstrap-content">
+
+    <style>
+      body {
+        margin: 0;
+        padding-top: 0px;
+        font-size: 20px;
+        background-color: #f9f9f9;
+      }
+
+      html[dir] #ipsLayout_sidebar.ipsLayout_sidebarleft,
+      html[dir] #ipsLayout_sidebar.ipsLayout_sidebarright {
+        padding: 0 !important;
+      }
+
+      #bootstrap-content {
+        font-family: "Noto Kufi Arabic", "Open Sans", "Helvetica Neue",
+          "Helvetica", "Arial", "sans-serif" !important;
+      }
+
+      .steps-content-img {
+        width: 50px !important;
+      }
+
+      .card-img-top {
+        height: auto !important;
+      }
+
+      .bg-white .card {
+        background-color: #f9f9f9 !important;
+      }
+
+      #ipsLayout_body {
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+      }
+
+      #ipsLayout_mainArea {
+        display: block;
+        padding: 0 !important;
+      }
+
+      #qa .btn-primary {
+        border: 0 !important;
+      }
+
+      #qa .btn-primary:hover {
+        background-color: #898989 !important;
+        border: 0 !important;
+      }
+
+      #wiki {
+        background-color: #205a23;
+        color: white !important;
+      }
+
+      #wiki p,
+      #wiki a,
+      #qa p,
+      #qa a,
+      #articles a {
+        color: white !important;
+      }
+
+      #qa
+      {
+        background-color: #282828;
+        color: white !important;
+      }
+
+      :root {
+        --main: #4b4e57;
+        --hover: #898989;
+        --bs-white-rgb: 255, 255, 255;
+      }
+
+      .hero.with-image {
+        background-image: url("{% static 'assets/images/backgrounds/home-bg.jpg' %}") !important;
+        height: 450px !important;
+      }
+
+      .card-img-top {
+        height: auto !important;
+      }
+
+      #yt p,
+      #yt a {
+        color: white;
+      }
+
+      #nums p {
+        margin-bottom: 0;
+      }
+
+      #bootstrap-content .background-freature,
+      #yt {
+        background: #282828 !important;
+        color: white;
+      }
+    </style>
+
+    <!-- hero section -->
+    <div class="hero with-image">
+      <div class="container main-container">
+        <div class="row">
+          <div class="col-lg-8 m-auto">
+            <h1 class="hero-title">{% trans "Learn programming from zero to hero" %}</h1>
+            <h2 class="hero-secondary-title">
+              {% trans "Hsoub Academy provides you with comprehensive and diverse Arabic content to help you learn programming professionally and easily" %}
+            </h2>
+            <a href="#courses" class="btn btn-primary btn-lg mt-3">
+              {% trans "Buy our courses now" %}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid section -->
+    <div id="courses" class="grid three-column bg-white">
+      <div class="container main-container">
+        <div class="block">
+          <div class="main-block">
+            <h2 class="main-block-title">{% trans "Courses of hsoub academy" %}</h2>
+            <p class="main-block-paragraph">
+              {% trans "Comprehensive programming for learning programming based on practical application and computer programming real, it starts with you from scratch and takes you a step towards professionalism" %}
+            </p>
+          </div>
+          <div class="row">
+            {% for course in courses %}
+
+            <div class="col-md-4 mb-30">
+              <a href="{% url "academy.course_details" course.id %}">
+                <img src="{{ course.pic.url }}" width="100%" alt="Image alt">
+              </a>
+            </div>
+
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- why Hsoub Academy -->
+    <div id="features-section" class="">
+      <div class="container main-container">
+        <div class="block">
+          <div class="main-block">
+            <h2 class="main-block-title">{% trans "Why learn through Hsoub Academy?" %}</h2>
+          </div>
+          <div class="row">
+            <div class="col-md-4 col-sm-6">
+              <div class="features with-icon-center">
+                <div class="thumb">
+                  <img src="{% static 'assets/images/why_hsoub/teacher_black.svg' %}" alt="{% trans " Constant guidance
+                    from trainers" %}">
+                </div>
+                <div class="features-content">
+                  <h4 class="features-content-title">
+                    {% trans 'Constant guidance from trainers' %}
+                  </h4>
+                  <p class="features-content-description">
+                    {% trans 'We answer your questions and inquiries through a team of specialized trainers all the time.' %}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-4 col-sm-6">
+              <div class="features with-icon-center">
+                <div class="thumb">
+                  <img src="{% static 'assets/images/why_hsoub/investment_black.svg' %}" alt="{% trans " Guaranteed
+                    recovery of your investment" %}">
+                </div>
+                <div class="features-content">
+                  <h4 class="features-content-title">
+                    {% trans "Guaranteed recovery of your investment" %}
+                  </h4>
+                  <p class="features-content-description">
+                    {% trans "After obtaining the certificate, even if you do not get a job within 6 months Covers the cost of the course you paid, we will refund you what you paid. With this simplicity!" %}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="features with-icon-center">
+                <div class="thumb">
+                  <img src="{% static 'assets/images/why_hsoub/certificate_black.svg' %}" alt="{% trans " Accredited certification" %}">
+                </div>
+                <div class="features-content">
+                  <h4 class="features-content-title">{% trans "Accredited certification" %}</h4>
+                  <p class="features-content-description">
+                    {% trans "Our certificate is accredited and given after successfully passing the exam and submitting a project A real graduation certificate, not an attendance certificate." %}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="features with-icon-center">
+                <div class="features-content">
+                  <div class="thumb">
+                    <img src="{% static 'assets/images/why_hsoub/plus_black.svg' %}" alt="{% trans " Access to basics paths" %}">
+                  </div>
+                  <h4 class="features-content-title">
+                    {% trans "Access to basics paths" %}
+                  </h4>
+                  <p class="features-content-description">
+                    {% trans "By subscribing to this course you will also get access to Track 1 In all other Hsoub Academy courses." %}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="features with-icon-center">
+                <div class="features-content">
+                  <div class="thumb">
+                    <img src="{% static 'assets/images/why_hsoub/cv_black.svg' %}" alt="{% trans " CV writing service"
+                      %}">
+                  </div>
+                  <h4 class="features-content-title">
+                    {% trans "Free CV writing service" %}
+                  </h4>
+                  <p class="features-content-description">
+                    {% trans "After you are awarded the certificate, you will receive:" %}
+                    <a href="https://baaeed.com/job-seekers/resume">
+                      {% trans "CV writing package in a remote location" %}
+                    </a>
+                    {% trans "$99 value for free." %}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="features with-icon-center">
+                <div class="features-content">
+                  <div class="thumb">
+                    <img src="{% static 'assets/images/why_hsoub/briefcase_black.svg' %}" alt="{% trans " Building a business gallery" %}">
+                  </div>
+                  <h4 class="features-content-title">{% trans "Building a business gallery" %}</h4>
+                  <p class="features-content-description">
+                    {% trans "When you complete the course and your practical application with it, you will have a group Great practical projects in your gallery" %}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="features with-icon-center">
+                <div class="features-content">
+                  <div class="thumb">
+                    <img src="{% static 'assets/images/why_hsoub/project_black.svg' %}" alt="{% trans " Real practical projects" %}">
+                  </div>
+                  <h4 class="features-content-title">{% trans "Real practical projects" %}</h4>
+                  <p class="features-content-description">
+                    {% trans "Our courses are developed based on the needs of the labor market, according to Sahib The largest Arab job sites: Khamsat, Mustaqil, and Far." %}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="features with-icon-center">
+                <div class="features-content">
+                  <div class="thumb">
+                    <img src="{% static 'assets/images/why_hsoub/lifetime_black.svg' %}" alt="{% trans " Lifetime access" %}">
+                  </div>
+                  <h4 class="features-content-title">{% trans "Lifetime access" %}</h4>
+                  <p class="features-content-description">
+                    {% trans "When you sign up for this course you will pay the cost only once, there are no recurring fees." %}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 col-sm-6">
+              <div class="features with-icon-center">
+                <div class="features-content">
+                  <div class="thumb">
+                    <img src="{% static 'assets/images/why_hsoub/update_black.svg' %}" alt="{% trans " Free continuous updates" %}">
+                  </div>
+                  <h4 class="features-content-title">
+                    {% trans "Free continuous updates" %}
+                  </h4>
+                  <p class="features-content-description">
+                    {% trans "We are constantly updating our courses, adding new tracks and updating the content current periodically." %}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Hsoub Wiki -->
+    <div id="wiki" class="">
+      <div class="container main-container">
+        <div class="block with-image list-video">
+          <div class="row">
+            <div class="col-md-6 d-flex text-center text-md-start justify-content-center order-2 order-md-1 mt-md-5">
+              <div class="features pe-5">
+                <h2>{% trans "Wiki Hsoub" %}</h2>
+                <p>
+                  {% trans "Hassoub Encyclopedia aims to provide complete, high-quality, supported Arabic documentation With examples of various programming languages, web development, and mobile applications." %}
+                </p>
+                <div class="btn btn-success btn-lg mt-2 mx-auto">
+                  <a href="#">{% trans "Browse all documentation" %}</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center mb-5 mb-md-0 order-1 order-md-2">
+              <img class="" src="{% static " assets/images/logos/wiki-logo-white.svg" %}" loading="lazy" width="30%"
+                alt="{% trans " Wiki Hsoub" %}">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Stats -->
+    <div id="nums" class="grid steps">
+      <div class="container main-container">
+        <div class="block">
+          <div class="main-block">
+            <h2 class="main-block-title">{% trans "Academy in numbers" %}</h2>
+          </div>
+          <div class="row text-center">
+            <div class="col-md-3 mb-md-0 mb-5">
+              <div class="steps-content horizontal-steps">
+                <div>
+                  <div>
+                    <h3 class="steps-content-title">{% trans "+6,500 articles" %}</h3>
+                    <p class="steps-content-description">
+                      {% trans "We published it in programming and various departments" %}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 mb-md-0 mb-5">
+              <div class="steps-content horizontal-steps">
+                <div>
+                  <div>
+                    <h3 class="steps-content-title">{% trans "+350 hours of video" %}</h3>
+                    <p class="steps-content-description">
+                      {% trans "In 56 educational tracks in 7 comprehensive courses" %}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 mb-md-0 mb-5">
+              <div class="steps-content horizontal-steps">
+                <div class=" ">
+                  <div>
+                    <h3 class="steps-content-title">{% trans "+200,000 students" %}</h3>
+                    <p class="steps-content-description">
+                      {% trans "Participated in Hassoub Academy" %}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- QA -->
+    <div id="qa">
+      <div class="container main-container">
+        <div class="block with-image list-video">
+          <div class="row">
+            <div class="col-md-6 d-flex text-center text-md-start justify-content-center order-2 order-md-1 mt-md-5">
+              <div class="features pe-5">
+                <h2>{% trans "Q&A community" %}</h2>
+                <p>
+                  {% trans "Be part of the Arab programming community, start a discussion or help others by answering their questions" %}
+                </p>
+                <div class="btn btn-primary btn-lg mt-2 mx-auto">
+                  <a href="#">
+                    {% trans "Browse all sections" %}
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 d-flex justify-content-center mb-5 mb-md-0 order-1 order-md-2">
+              <a href="#" class="d-flex justify-content-center align-content-center align-items-center">
+                <img src="{% static "assets/images/qa/qa.svg" %}" width="50%" alt="{% trans " Q&A community" %}">
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </main>
+
+</div>
+
+<nav class="ipsBreadcrumb ipsBreadcrumb_bottom ipsFaded_withHover">
+
+  <ul class="ipsList_inline ipsPos_right">
+  </ul>
+
+  <ul data-role="breadcrumbList">
+    <li>
+      <a title="{% trans "Home" %}" href="{% url "home" %}">
+        <span>{% trans "Home" %}</span>
+      </a>
+    </li>
+
+
+  </ul>
+
+</nav>
+
+
+{% endblock content %}

@@ -1,0 +1,83 @@
+{% extends 'academy/elements/base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+  {% trans 'Hsoub - Courses' %}
+{% endblock %}
+
+{% block content %}
+  <div id="ipsLayout_mainArea">
+    <div class="ipsBox_alt">
+      <div class="ipsType_center ipsPad">
+        <i class="ipsType_huge fa fa-shopping-cart"></i>
+        <h1 class="ipsType_reset ipsType_veryLarge ipsType_center">{% trans "Your Cart" %}</h1>
+      </div>
+
+      <div data-controller="nexus.front.store.cartReview">
+        <div data-role="cart">
+          <div class="ipsClearfix" id="elNexusCart">
+            <div class="ipsBox ipsPad_half">
+
+              {% for course in cart_courses %}
+              
+                <div id="elCartItem" class="ipsClearfix">
+                  <div class="ipsPos_left ipsPad_half">
+                    <img src="{{ course.pic.url }}" class="ipsThumb ipsThumb_small" />
+                  </div>
+                  <div class="ipsPos_left ipsPad_half">
+                    <h2 class="ipsDataItem_title ipsType_sectionHead ipsType_break">{{ course.title }}</h2>
+
+                    <div class="ipsDataItem_meta ipsSpacer_top ipsSpacer_half">
+                      <ul class="ipsList_inline ipsType_small">
+                        <li>
+                          <a type="button" data-url="{% url 'academy.store.cart.remove' course.id %}" onclick="cartRemove(this)"><i class="fa fa-times"></i> {% trans "Remove form cart" %}</a>
+                        </li>
+                      </ul>
+                      <div class="ipsPad ipsHide ipsMenu ipsMenu_veryNarrow ipsType_center" id="elItemRow0_quantity_menu">
+                        <form action="#" method="post" data-role="quantityForm">
+                          <input type="number" name="item[0]" value="1" />
+                          <button type="submit" class="ipsButton ipsButton_primary ipsButton_verySmall ipsButton_fullWidth ipsSpacer_top">{% trans "Update" %}</button>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="ipsPos_right ipsPad_half ipsType_right ipsPos_top">
+                    <span class="cNexusPrice ipsType_large">{{ course.price }}$</span>
+                  </div>
+                </div>
+              
+              {% endfor %}
+
+
+             {% if not cart_total == 0 %}
+                <hr class="ipsHr" />
+                <div class="cNexusCart_totals ipsType_right">
+                  {% trans "Total" %}:<span class="cNexusPrice">{{ cart_total }}$</span>
+                </div>
+             {% endif %}
+            </div>
+          </div>
+          {% if cart_total == 0 %}
+            <ul class="ipsToolList ipsToolList_horizontal ipsClearfix ipsSpacer_both">
+              <li class="ipsToolList_primaryAction">
+                <a class="ipsButton ipsButton_large ipsButton_light ipsButton_fullWidth" href="{% url "store" %}" title=""><i class="fa fa-chevron-left ipsPos_middle"></i>&nbsp; {% trans "Add courses" %}</a>
+              </li>
+            </ul>
+            {% else %}
+              <ul class="ipsToolList ipsToolList_horizontal ipsClearfix ipsSpacer_both">
+                <li class="ipsToolList_primaryAction">
+                  <a class="ipsButton ipsButton_large ipsButton_important ipsButton_fullWidth" href="{% url "academy.checkout" %}" data-action="checkout">{% trans "Checkout" %} &nbsp;<i class="fa fa-chevron-right ipsPos_middle"></i></a>
+                </li>
+                <li class="ipsToolList_primaryAction">
+                  <a class="ipsButton ipsButton_large ipsButton_light ipsButton_fullWidth" href="{% url "store" %}" title=""><i class="fa fa-chevron-left ipsPos_middle"></i>&nbsp; {% trans "Add more courses" %}</a>
+                </li>
+              </ul>
+          {% endif %}
+          <br />
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

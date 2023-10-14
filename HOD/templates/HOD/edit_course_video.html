@@ -1,0 +1,44 @@
+{% extends "HOD/elements/base.html" %}
+
+{% block title %}
+  Admin - Edit Course Video
+{% endblock title %}
+
+
+{% block content %}
+
+  <p>
+    <a href="{% url "courses" %}">Courses</a> / <a href="{% url "course_profile" course.id %}">{{ course.title }}</a> / <a href="{% url "course_subtitle_profile" course.id subtitle.id %}">{{subtitle.subtitle}}</a> / <a href="{% url "course_video_profile" course.id subtitle.id video.id %}">{{ video.title }}</a> / <a href="{% url "edit_course_video" course.id subtitle.id video.id %}">Edit</a>
+  </p>
+
+  <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Edit </span> Video</h4>
+  <div class="row">
+
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-body demo-vertical-spacing demo-only-element">
+          
+          <form action="{% url "edit_course_video" course.id subtitle.id video.id %}" method="POST" enctype="multipart/form-data"> 
+            {% csrf_token %}
+
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="Title hare..." name="title" value="{{ video.title }}" required>
+              <span class="input-group-text" id="email-addon">Title</span>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label" for="pic">Video</label>
+              <input type="file" class="form-control" id="video" name="video">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+{% endblock content %}
+
+

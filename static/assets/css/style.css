@@ -1,0 +1,190 @@
+/*
+* Landing pages styles
+*/
+body {
+  padding-top: 0px;
+}
+
+/* Stripe input style */
+div#card_elements {
+  font-size: 14px;
+  width: 100%;
+  height: 40px;
+  padding: 6px 12px;
+  background-color: #fff;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 0;
+  margin-bottom: 1.5rem;
+  padding-top: 11px;
+}
+
+.form.with-background-white form {
+  padding: 0;
+}
+.collapse-course .accordion-button::after {
+  order: -1;
+  margin-left: 1em;
+  margin-right: 0;
+}
+.course-icon {
+  width: 25px;
+}
+.course-list-title {
+  flex: 3;
+}
+.record-preview-link {
+  flex: 1;
+  color: #165180 !important;
+}
+
+@media screen and (max-width: 1400px) {
+  #testimonials .carousel-inner {
+    height: 400px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  #testimonials .carousel-inner {
+    height: 435px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  #testimonials .carousel-inner {
+    height: 435px;
+  }
+}
+@media screen and (max-width: 1000px) {
+  #testimonials .carousel-inner {
+    height: 470px;
+  }
+}
+@media screen and (max-width: 900px) {
+  #testimonials .carousel-inner {
+    height: 500px;
+  }
+}
+@media screen and (max-width: 800px) {
+  #testimonials .carousel-inner {
+    height: 520px;
+  }
+}
+@media screen and (max-width: 767px) {
+  #testimonials .carousel-inner {
+    height: 420px;
+  }
+}
+@media screen and (max-width: 650px) {
+  #testimonials .carousel-inner {
+    height: 450px;
+  }
+}
+@media screen and (max-width: 600px) {
+  #testimonials .carousel-inner {
+    height: 470px;
+  }
+}
+@media screen and (max-width: 550px) {
+  #testimonials .carousel-inner {
+    height: 500px;
+  }
+}
+@media screen and (max-width: 500px) {
+  #testimonials .carousel-inner {
+    height: 530px;
+  }
+}
+@media screen and (max-width: 450px) {
+  #testimonials .carousel-inner {
+    height: 580px;
+  }
+}
+@media screen and (max-width: 400px) {
+  #testimonials .carousel-inner {
+    height: 630px;
+  }
+}
+@media screen and (max-width: 350px) {
+  #testimonials .carousel-inner {
+    height: 660px;
+  }
+}
+
+.course-content-item {
+  padding-bottom: 0.5rem !important;
+}
+
+#coursesAccordion span.badge {
+  line-height: 1;
+  font-weight: normal;
+  padding: 0.35em 0.65em;
+  font-size: 12px;
+  border-radius: 0.25rem;
+}
+#coursesAccordion span.bg-secondary {
+  font-family: "Open Sans", "Helvetica Neue", "Helvetica", "Arial", "sans-serif";
+}
+
+#coursesAccordion .sub-accordion {
+  margin-right: 9.5px;
+}
+
+#coursesAccordion .sub-accordion .accordion-item > div {
+  margin-right: calc(1em + 20px);
+}
+
+#features-section a {
+  color: white;
+  text-decoration: underline;
+}
+#faqAccordion h4 {
+  font-size: 1.1em;
+}
+@media screen and (max-width: 768px) {
+  #coursesAccordion .accordion-header button > span + span {
+    display: block;
+    width: 100%;
+    margin-right: 38px;
+  }
+  #coursesAccordion .accordion-button {
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  #coursesAccordion .accordion-button::after {
+    margin-top: 5.5px;
+  }
+  #coursesAccordion .sub-accordion .accordion-item > div {
+    margin-right: 0;
+  }
+  #coursesAccordion .sub-accordion {
+    margin-right: 0;
+  }
+
+  #faqAccordion .accordion-button {
+    align-items: flex-start;
+  }
+  #faqAccordion .accordion-button::after {
+    margin-top: 5.5px;
+  }
+}
+
+#coursesAccordion .record-listing-preview a {
+  text-decoration: underline;
+  color: #165180;
+}
+
+/*
+Needed for Zaetoon chat
+*/
+body {
+  font-family: "Noto Naskh Arabic","Open Sans","Helvetica Neue","Helvetica","Arial","sans-serif";
+}
+
+.btn, button, .nav-link, .list-video, #payment-form, h1, h2, h3, h4, h5, h6 {
+ font-family: "Noto Kufi Arabic","Open Sans","Helvetica Neue","Helvetica","Arial","sans-serif"
+}
+
+#validate-coupon {
+  height: 40px;
+}

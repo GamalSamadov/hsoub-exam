@@ -1,0 +1,267 @@
+{% extends 'academy/elements/base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+  {% trans 'Hsoub - Courses' %}
+{% endblock %}
+
+{% block content %}
+  <div id="ipsLayout_contentWrapper">
+    <nav class="ipsBreadcrumb ipsBreadcrumb_top ipsFaded_withHover">
+      <ul class="ipsList_inline ipsPos_right">
+        <li>
+          <a data-action="defaultStream" class="ipsType_light" href="https://academy.hsoub.com/discover/"><i class="fa fa-newspaper-o" aria-hidden="true"></i> <span>كل الأنشطة</span></a>
+        </li>
+      </ul>
+
+      <ul data-role="breadcrumbList">
+        <li>
+          <a title="الرئيسية" href="https://academy.hsoub.com/"><span>الرئيسية <i class="fa fa-angle-right"></i></span></a>
+        </li>
+
+        <li>
+          <a href="https://academy.hsoub.com/store/"><span>دورات <i class="fa fa-angle-right" aria-hidden="true"></i></span></a>
+        </li>
+
+        <li>
+          <a href="https://academy.hsoub.com/store/c1-%D8%AF%D9%88%D8%B1%D8%A7%D8%AA-%D8%AA%D8%B9%D9%84%D9%8A%D9%85%D9%8A%D8%A9/"><span>دورات تعليمية</span></a>
+        </li>
+      </ul>
+    </nav>
+
+    <div id="ipsLayout_mainArea">
+      <header class="ipsPageHeader ipsBox ipsPadding ipsResponsive_pull ipsClearfix ipsSpacer_bottom">
+        <h1 class="ipsType_pageTitle ipsType_largeTitle">دورات تعليمية</h1>
+
+        <div class="ipsType_richText ipsType_normal" data-controller="core.front.core.lightboxedImages"></div>
+      </header>
+
+      <div data-role="packageListContainer" id="ips_uid_8776_3">
+        <section class="ipsBox">
+          <!-- <h2 class='ipsType_sectionTitle ipsType_reset'><span class='ipsType_medium'>العدد 7 </span></h2> -->
+          <div class="ipsButtonBar ipsPad_half ipsClearfix ipsClear">
+            <ul class="ipsButtonRow ipsPos_right ipsClearfix">
+              <li>
+                <a data-action="filter" href="https://academy.hsoub.com/store/c1-%D8%AF%D9%88%D8%B1%D8%A7%D8%AA-%D8%AA%D8%B9%D9%84%D9%8A%D9%85%D9%8A%D8%A9/?view=grid&amp;csrfKey=b56f767c500379ee1352f6d6a18d8f80" data-ipstooltip="" title="عرض شبكي" class="ipsButtonRow_active"><i class="fa fa-th-large"></i></a>
+              </li>
+              <li>
+                <a data-action="filter" href="https://academy.hsoub.com/store/c1-%D8%AF%D9%88%D8%B1%D8%A7%D8%AA-%D8%AA%D8%B9%D9%84%D9%8A%D9%85%D9%8A%D8%A9/?view=list&amp;csrfKey=b56f767c500379ee1352f6d6a18d8f80" data-ipstooltip="" title="عرض كقائمة" class=""><i class="fa fa-th-list"></i></a>
+              </li>
+            </ul>
+            <!--  <ul class="ipsButtonRow ipsPos_right ipsClearfix">
+          <li>
+            <a href="#elSortByMenu_menu" id="elSortByMenu_products" data-role="sortButton" data-ipsMenu data-ipsMenu-activeclass="ipsButtonRow_active" data-ipsMenu-selectable="radio">ترتيب حسب <i class="fa fa-caret-down"></i></a>
+            <ul class="ipsMenu ipsMenu_auto ipsMenu_withStem ipsMenu_selectable ipsHide" id="elSortByMenu_products_menu">
+              
+                <li class="ipsMenu_item ipsMenu_itemChecked" data-ipsmenuvalue="default">
+                  
+                    <a data-action="filter" href="https://academy.hsoub.com/store/c1-%D8%AF%D9%88%D8%B1%D8%A7%D8%AA-%D8%AA%D8%B9%D9%84%D9%8A%D9%85%D9%8A%D8%A9/">
+                  
+                    الموصى به
+                  </a>
+                </li>
+              
+                <li class="ipsMenu_item " data-ipsmenuvalue="name">
+                  
+                    <a data-action="filter" href="https://academy.hsoub.com/store/c1-%D8%AF%D9%88%D8%B1%D8%A7%D8%AA-%D8%AA%D8%B9%D9%84%D9%8A%D9%85%D9%8A%D8%A9/?sortby=name">
+                  
+                    الاسم
+                  </a>
+                </li>
+              
+                <li class="ipsMenu_item " data-ipsmenuvalue="price_low">
+                  
+                    <a data-action="filter" href="https://academy.hsoub.com/store/c1-%D8%AF%D9%88%D8%B1%D8%A7%D8%AA-%D8%AA%D8%B9%D9%84%D9%8A%D9%85%D9%8A%D8%A9/?sortby=price_low">
+                  
+                    السعر: الأرخص للأغلى
+                  </a>
+                </li>
+              
+                <li class="ipsMenu_item " data-ipsmenuvalue="price_high">
+                  
+                    <a data-action="filter" href="https://academy.hsoub.com/store/c1-%D8%AF%D9%88%D8%B1%D8%A7%D8%AA-%D8%AA%D8%B9%D9%84%D9%8A%D9%85%D9%8A%D8%A9/?sortby=price_high">
+                  
+                    السعر: الأغلى للأرخص
+                  </a>
+                </li>
+              
+                <li class="ipsMenu_item " data-ipsmenuvalue="rating">
+                  
+                    <a data-action="filter" href="https://academy.hsoub.com/store/c1-%D8%AF%D9%88%D8%B1%D8%A7%D8%AA-%D8%AA%D8%B9%D9%84%D9%8A%D9%85%D9%8A%D8%A9/?sortby=rating">
+                  
+                    التقييم
+                  </a>
+                </li>
+              
+            </ul>
+          </li>
+        </ul>  -->
+          </div>
+
+          <div class="ipsPad">
+            <ol class="ipsGrid ipsGrid_collapsePhone cNexusCategory_grid" data-ipsgrid="" data-ipsgrid-minitemsize="170" data-ipsgrid-maxitemsize="230" data-ipsgrid-equalheights="row" data-role="packageList" style="height: auto;">
+              <li class="cNexusProduct ipsPad_half ipsClearfix ipsGrid_span3" style="height: 272.438px;">
+                <a href="https://academy.hsoub.com/store/10-%D8%AF%D9%88%D8%B1%D8%A9-%D8%A5%D8%AF%D8%A7%D8%B1%D8%A9-%D8%AA%D8%B7%D9%88%D9%8A%D8%B1-%D8%A7%D9%84%D9%85%D9%86%D8%AA%D8%AC%D8%A7%D8%AA/" class="cNexusProduct_image"><img src="https://academy.hsoub.com/uploads/monthly_2022_08/product-development-management.png.81423c55a9d9eda1c1ac5e28966a0ec8.png" class="ipsImage" alt="دورة إدارة تطوير المنتجات" width="140" /></a>
+                <div>
+                  <h2 class="cNexusProduct_title ipsType_normal ipsType_unbold ipsType_reset ipsType_blendLinks"><a href="https://academy.hsoub.com/store/10-%D8%AF%D9%88%D8%B1%D8%A9-%D8%A5%D8%AF%D8%A7%D8%B1%D8%A9-%D8%AA%D8%B7%D9%88%D9%8A%D8%B1-%D8%A7%D9%84%D9%85%D9%86%D8%AA%D8%AC%D8%A7%D8%AA/" data-role="productLink" class="">دورة إدارة تطوير المنتجات</a></h2>
+                  <div class="ipsType_reset ipsTruncate ipsTruncate_line">
+                    <div class="cNexusProduct__prices">
+                      <div>
+                        <span class="cNexusPrice">290.00 USD</span>
+
+                        <span class="cNexusPrice_tax ipsType_light"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li class="cNexusProduct ipsPad_half ipsClearfix ipsGrid_span3" style="height: 272.438px;">
+                <a href="https://academy.hsoub.com/store/7-%D8%AF%D9%88%D8%B1%D8%A9-%D8%B9%D9%84%D9%88%D9%85-%D8%A7%D9%84%D8%AD%D8%A7%D8%B3%D9%88%D8%A8/" class="cNexusProduct_image"><img src="https://academy.hsoub.com/uploads/monthly_2020_11/computer-science.png.3ab00d4e218f8011a88e1e3e1602108d.png" class="ipsImage" alt="دورة علوم الحاسوب" width="140" /></a>
+                <div>
+                  <h2 class="cNexusProduct_title ipsType_normal ipsType_unbold ipsType_reset ipsType_blendLinks"><a href="https://academy.hsoub.com/store/7-%D8%AF%D9%88%D8%B1%D8%A9-%D8%B9%D9%84%D9%88%D9%85-%D8%A7%D9%84%D8%AD%D8%A7%D8%B3%D9%88%D8%A8/" data-role="productLink" class="">دورة علوم الحاسوب</a></h2>
+                  <div class="ipsType_reset ipsTruncate ipsTruncate_line">
+                    <div class="cNexusProduct__prices">
+                      <div>
+                        <span class="cNexusPrice">290.00 USD</span>
+
+                        <span class="cNexusPrice_tax ipsType_light"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li class="cNexusProduct ipsPad_half ipsClearfix ipsGrid_span3" style="height: 272.438px;">
+                <a href="https://academy.hsoub.com/store/1-%D8%AF%D9%88%D8%B1%D8%A9-%D8%AA%D8%B7%D9%88%D9%8A%D8%B1-%D9%88%D8%A7%D8%AC%D9%87%D8%A7%D8%AA-%D8%A7%D9%84%D9%85%D8%B3%D8%AA%D8%AE%D8%AF%D9%85/" class="cNexusProduct_image"><img src="https://academy.hsoub.com/uploads/monthly_2020_11/front-end-web-development.png.5b763d9d6f5c0537680950dccb26e7e4.png" class="ipsImage" alt="دورة تطوير واجهات المستخدم" width="140" /></a>
+                <div>
+                  <h2 class="cNexusProduct_title ipsType_normal ipsType_unbold ipsType_reset ipsType_blendLinks"><a href="https://academy.hsoub.com/store/1-%D8%AF%D9%88%D8%B1%D8%A9-%D8%AA%D8%B7%D9%88%D9%8A%D8%B1-%D9%88%D8%A7%D8%AC%D9%87%D8%A7%D8%AA-%D8%A7%D9%84%D9%85%D8%B3%D8%AA%D8%AE%D8%AF%D9%85/" data-role="productLink" class="">دورة تطوير واجهات المستخدم</a></h2>
+                  <div class="ipsType_reset ipsTruncate ipsTruncate_line">
+                    <div class="cNexusProduct__prices">
+                      <div>
+                        <span class="cNexusPrice">290.00 USD</span>
+
+                        <span class="cNexusPrice_tax ipsType_light"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li class="cNexusProduct ipsPad_half ipsClearfix ipsGrid_span3" style="height: 272.438px;">
+                <a href="https://academy.hsoub.com/store/9-%D8%AF%D9%88%D8%B1%D8%A9-%D8%AA%D8%B7%D9%88%D9%8A%D8%B1-%D8%A7%D9%84%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%D8%A7%D8%AA-%D8%A8%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D9%84%D8%BA%D8%A9-python/" class="cNexusProduct_image"><img src="https://academy.hsoub.com/uploads/monthly_2022_02/python-application-development.png.88ec0eba8c6e4dc61f6cbd17fefb309e.png" class="ipsImage" alt=" دورة تطوير التطبيقات باستخدام لغة Python" width="140" /></a>
+                <div>
+                  <h2 class="cNexusProduct_title ipsType_normal ipsType_unbold ipsType_reset ipsType_blendLinks"><a href="https://academy.hsoub.com/store/9-%D8%AF%D9%88%D8%B1%D8%A9-%D8%AA%D8%B7%D9%88%D9%8A%D8%B1-%D8%A7%D9%84%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%D8%A7%D8%AA-%D8%A8%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D9%84%D8%BA%D8%A9-python/" data-role="productLink" class="">دورة تطوير التطبيقات باستخدام لغة Python</a></h2>
+                  <div class="ipsType_reset ipsTruncate ipsTruncate_line">
+                    <div class="cNexusProduct__prices">
+                      <div>
+                        <span class="cNexusPrice">290.00 USD</span>
+
+                        <span class="cNexusPrice_tax ipsType_light"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li class="cNexusProduct ipsPad_half ipsClearfix ipsGrid_span3" style="height: 272.438px;">
+                <a href="https://academy.hsoub.com/store/5-%D8%AF%D9%88%D8%B1%D8%A9-%D8%AA%D8%B7%D9%88%D9%8A%D8%B1-%D8%A7%D9%84%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%D8%A7%D8%AA-%D8%A8%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D9%84%D8%BA%D8%A9-javascript/" class="cNexusProduct_image"><img src="https://academy.hsoub.com/uploads/monthly_2020_11/javascript-application-development.png.ad30c30659e773b11420a244aa6ddcfb.png" class="ipsImage" alt=" دورة تطوير التطبيقات باستخدام لغة JavaScript" width="140" /></a>
+                <div>
+                  <h2 class="cNexusProduct_title ipsType_normal ipsType_unbold ipsType_reset ipsType_blendLinks"><a href="https://academy.hsoub.com/store/5-%D8%AF%D9%88%D8%B1%D8%A9-%D8%AA%D8%B7%D9%88%D9%8A%D8%B1-%D8%A7%D9%84%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%D8%A7%D8%AA-%D8%A8%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D9%84%D8%BA%D8%A9-javascript/" data-role="productLink" class="">دورة تطوير التطبيقات باستخدام لغة JavaScript</a></h2>
+                  <div class="ipsType_reset ipsTruncate ipsTruncate_line">
+                    <div class="cNexusProduct__prices">
+                      <div>
+                        <span class="cNexusPrice">290.00 USD</span>
+
+                        <span class="cNexusPrice_tax ipsType_light"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li class="cNexusProduct ipsPad_half ipsClearfix ipsGrid_span3" style="height: 272.438px;">
+                <a href="https://academy.hsoub.com/store/2-%D8%AF%D9%88%D8%B1%D8%A9-%D8%AA%D8%B7%D9%88%D9%8A%D8%B1-%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%D8%A7%D8%AA-%D8%A7%D9%84%D9%88%D9%8A%D8%A8-%D8%A8%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D9%84%D8%BA%D8%A9-php/" class="cNexusProduct_image"><img src="https://academy.hsoub.com/uploads/monthly_2020_11/php-web-application-development.png.fc6dab8921808afc91d91984c3717704.png" class="ipsImage" alt=" دورة تطوير تطبيقات الويب باستخدام لغة PHP " width="140" /></a>
+                <div>
+                  <h2 class="cNexusProduct_title ipsType_normal ipsType_unbold ipsType_reset ipsType_blendLinks"><a href="https://academy.hsoub.com/store/2-%D8%AF%D9%88%D8%B1%D8%A9-%D8%AA%D8%B7%D9%88%D9%8A%D8%B1-%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%D8%A7%D8%AA-%D8%A7%D9%84%D9%88%D9%8A%D8%A8-%D8%A8%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D9%84%D8%BA%D8%A9-php/" data-role="productLink" class="">دورة تطوير تطبيقات الويب باستخدام لغة PHP</a></h2>
+                  <div class="ipsType_reset ipsTruncate ipsTruncate_line">
+                    <div class="cNexusProduct__prices">
+                      <div>
+                        <span class="cNexusPrice">290.00 USD</span>
+
+                        <span class="cNexusPrice_tax ipsType_light"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+
+              <li class="cNexusProduct ipsPad_half ipsClearfix ipsGrid_span3" style="height: 272.438px;">
+                <a href="https://academy.hsoub.com/store/4-%D8%AF%D9%88%D8%B1%D8%A9-%D8%AA%D8%B7%D9%88%D9%8A%D8%B1-%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%D8%A7%D8%AA-%D8%A7%D9%84%D9%88%D9%8A%D8%A8-%D8%A8%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D9%84%D8%BA%D8%A9-ruby/" class="cNexusProduct_image"><img src="https://academy.hsoub.com/uploads/monthly_2020_11/ruby-web-application-development.png.f706fa2183d882ea73043f96899c99fd.png" class="ipsImage" alt=" دورة تطوير تطبيقات الويب باستخدام لغة Ruby" width="140" /></a>
+                <div>
+                  <h2 class="cNexusProduct_title ipsType_normal ipsType_unbold ipsType_reset ipsType_blendLinks"><a href="https://academy.hsoub.com/store/4-%D8%AF%D9%88%D8%B1%D8%A9-%D8%AA%D8%B7%D9%88%D9%8A%D8%B1-%D8%AA%D8%B7%D8%A8%D9%8A%D9%82%D8%A7%D8%AA-%D8%A7%D9%84%D9%88%D9%8A%D8%A8-%D8%A8%D8%A7%D8%B3%D8%AA%D8%AE%D8%AF%D8%A7%D9%85-%D9%84%D8%BA%D8%A9-ruby/" data-role="productLink" class="">دورة تطوير تطبيقات الويب باستخدام لغة Ruby</a></h2>
+                  <div class="ipsType_reset ipsTruncate ipsTruncate_line">
+                    <div class="cNexusProduct__prices">
+                      <div>
+                        <span class="cNexusPrice">290.00 USD</span>
+
+                        <span class="cNexusPrice_tax ipsType_light"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            </ol>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <div id="ipsLayout_sidebar" class="ipsLayout_sidebarright" data-controller="core.front.widgets.sidebar">
+      <aside id="elContextualTools" class="ipsClearfix">
+        <div data-role="categorySidebar">
+          <div data-role="categorySidebar">
+            <div class="ipsBox ipsSpacer_bottom" id="elNexusFiltersBox">
+              <h2 class="ipsType_sectionTitle ipsType_reset">Filter By</h2>
+              <div class="ipsPad_half">
+                <div class="ipsSideMenu ipsSideMenu_withRadios ipsType_medium">
+                  <h4 class="ipsSideMenu_title ipsSpacer_top ipsSpacer_half">Price</h4>
+                  <ul class="ipsSideMenu_list">
+                    <li>
+                      <a href="https://academy.hsoub.com/store/c1-%D8%AF%D9%88%D8%B1%D8%A7%D8%AA-%D8%AA%D8%B9%D9%84%D9%8A%D9%85%D9%8A%D8%A9/?do=priceFilter" data-ipsdialog="" data-ipsdialog-size="narrow" data-ipsdialog-title="Set Price Filter" class="ipsSideMenu_item ipsTruncate ipsTruncate_line">Custom</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <hr class="ipsHr ipsSpacer_both" />
+    </div>
+
+    <nav class="ipsBreadcrumb ipsBreadcrumb_bottom ipsFaded_withHover">
+      <ul class="ipsList_inline ipsPos_right">
+        <li>
+          <a data-action="defaultStream" class="ipsType_light" href="https://academy.hsoub.com/discover/"><i class="fa fa-newspaper-o" aria-hidden="true"></i> <span>كل الأنشطة</span></a>
+        </li>
+      </ul>
+
+      <ul data-role="breadcrumbList">
+        <li>
+          <a title="الرئيسية" href="https://academy.hsoub.com/"><span>الرئيسية <i class="fa fa-angle-right"></i></span></a>
+        </li>
+
+        <li>
+          <a href="https://academy.hsoub.com/store/"><span>دورات <i class="fa fa-angle-right" aria-hidden="true"></i></span></a>
+        </li>
+
+        <li>
+          <a href="https://academy.hsoub.com/store/c1-%D8%AF%D9%88%D8%B1%D8%A7%D8%AA-%D8%AA%D8%B9%D9%84%D9%8A%D9%85%D9%8A%D8%A9/"><span>دورات تعليمية</span></a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+{% endblock %}

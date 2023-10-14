@@ -1,0 +1,96 @@
+{% extends 'academy/elements/base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+  {% trans 'Hsoub - Courses' %}
+{% endblock %}
+
+{% block content %}
+  <nav class="ipsBreadcrumb ipsBreadcrumb_top ipsFaded_withHover">
+    <ul class="ipsList_inline ipsPos_right">
+      <li>
+        <a data-action="defaultStream" class="ipsType_light" href="#"><i class="fa fa-newspaper-o" aria-hidden="true"></i> <span>{% trans 'Actions' %}</span></a>
+      </li>
+    </ul>
+
+    <ul data-role="breadcrumbList">
+      <li>
+        <a title="Home" href="{% url 'home' %}"><span>{% trans 'Home' %} <i class="fa fa-angle-right"></i></span></a>
+      </li>
+
+      <li>
+        <a href="{% url 'store.courses' %}"><span>{% trans 'All courses' %} <i class="fa fa-angle-right"></i></span></a>
+      </li>
+
+      <li>
+        <a href="{% url 'academy.store.course.details' course.id %}"><span>{{ course.title }}</span></a>
+      </li>
+    </ul>
+  </nav>
+
+  <div id="ipsLayout_mainArea">
+    <div class="cNexusProduct_header ipsBox ipsResponsive_pull ipsColumns ipsColumns_collapsePhone" data-controller="nexus.front.store.packagePage">
+      <div class="ipsColumn ipsColumn_veryWide">
+        <div class="ipsPadding:double sm:ipsPadding">
+          <div class="ipsType_center ipsContained">
+            <a href="#" class="cNexusProduct_primaryImage ipsContained"><img src="{{ course.pic.url }}" class="ipsImage ipsImage_thumb" /></a>
+          </div>
+        </div>
+      </div>
+      <div class="ipsColumn ipsColumn_fluid">
+        <div class="ipsPadding:double sm:ipsPadding">
+          <div class="ipsFlex ipsFlex-jc:between ipsFlex-ai:center ipsFlex-fw:wrap">
+            <h1 class="ipsType_pageTitle ipsType_largeTitle ipsMargin_right">{{ course.title }}</h1>
+          </div>
+
+          <span class="cNexusPrice ipsMargin_top"><span data-role="price">{{ course.price }}$</span></span>
+          <span class="cNexusPrice_tax ipsType_light"></span>
+
+          <div class="ipsType_richText ipsType_medium ipsType_break ipsContained ipsSpacer_top is-truncated" data-ipstruncate="" data-ipstruncate-size="2 lines" data-ipstruncate-type="remove" style="overflow-wrap: break-word;">{{ course.description }}</div>
+          <hr class="ipsHr" />
+
+          <div class="ipsAreaBackground_light ipsPadding ipsSpacer_bottom">
+            
+              <ul class="ipsForm">
+                <li class="ipsFieldRow">
+                  <div class="ipsFieldRow_content">
+                    {% if user.is_authenticated %}
+                      <button type="button" class="ipsButton ipsButton_primary" tabindex="2" accesskey="s" role="button" data-url="{% url "academy.store.cart_add" course.id %}" onclick="cartUpdate(this)">{% trans 'Add to cart' %}</button>
+                    {% else %}
+                      <p>Please login/register first</p>
+                      <a href="{% url "login" %}">
+                        <button type="button" class="ipsButton ipsButton_primary" tabindex="2" accesskey="s" role="button">{% trans 'Login' %}</button>
+                      </a>
+                    {% endif %}
+                  </div>
+                </li>
+              </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="ipsBreadcrumb ipsBreadcrumb_bottom ipsFaded_withHover">
+    <ul class="ipsList_inline ipsPos_right">
+      <li>
+        <a data-action="defaultStream" class="ipsType_light" href=""><i class="fa fa-newspaper-o" aria-hidden="true"></i> <span>{% trans 'Actions' %}</span></a>
+      </li>
+    </ul>
+
+    <ul data-role="breadcrumbList">
+      <li>
+        <a title="Home" href="{% url 'home' %}"><span>{% trans 'Home' %} <i class="fa fa-angle-right"></i></span></a>
+      </li>
+
+      <li>
+        <a href="{% url 'store' %}"><span>{% trans 'Courses' %}</span></a>
+      </li>
+    </ul>
+  </nav>
+
+
+{% endblock %}
+

@@ -1,0 +1,116 @@
+{% extends 'academy/elements/base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+  {% trans 'Hsoub - Courses' %}
+{% endblock %}
+
+{% block content %}
+  <div id="ipsLayout_mainArea">
+    <div class="ipsBox_alt">
+      <div class="ipsType_center ipsPad">
+        <i class="ipsType_huge fa fa-shopping-cart"></i>
+        <h1 class="ipsType_reset ipsType_veryLarge ipsType_center">{% trans 'Checkout' %}</h1>
+
+        <i class="fa fa-lock"></i> {% trans 'This page is protected' %}
+      </div>
+
+      <section>
+        <div class="ipsBox ipsPad" id="elCheckoutContent">
+          <div data-ipswizard="" class="ipsWizard">
+            <div data-role="wizardContent">
+              <div class="ipsColumns ipsColumns_collapsePhone ipsSpacer_top ipsSpacer_double cNexusCheckout_review" data-controller="nexus.front.checkout.review">
+                <div class="ipsColumn ipsColumn_fluid">
+                  <div class="ipsType_medium ipsType_light ipsSpacer_bottom">
+                    <i class="fa fa-info-circle"></i> {% trans "A confirmation of your purchase will be sent to" %}: {{ user.email }}
+                  </div>
+
+                 
+                  <section class="ipsAreaBackground ipsSpacer_top">
+                    <h2 class="ipsType_sectionTitle ipsType_reset ipsHide"><i class="fa fa-lock"></i> {% trans "Secure Payment" %}</h2>
+                    <div class="ipsPad">
+                      <div class="ipsFieldRow">
+                        <label class="ipsFieldRow_label" for="elInput_"><span class="ipsType_sectionHead">{% trans "How would you like to pay?" %}</span></label>
+                        <div class="ipsFieldRow_content">
+                          <ul class="ipsList_reset">
+                            {% comment %} <li class="ipsFieldRow_inlineCheckbox">
+                              <span class="ipsCustomInput">
+                                <input type="radio" checked="" required="" data-control="toggle" data-toggles="paymentMethodSubmit" id="elRadio_payment_method_1" name="payment_method" value="1" />
+                                <span></span>
+                              </span>
+                              <label for="elRadio_payment_method_1" id="elField_payment_method_label">PayPal</label>
+                            </li> {% endcomment %}
+                            
+                            <li class="ipsFieldRow_inlineCheckbox">
+
+                              <button type="button" class="ipsButton ipsButton_primary" onclick="createStripeSession()">{% trans "Credit Card" %}</button>
+
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      
+                      <form id="form-user-info">
+                        {% csrf_token %}
+                        <input class="form-control" type="text" name="first_name" id="firstNameInput">
+                        <input class="form-control" type="text" name="last_name" id="lastNameInput">
+                        <input class="form-control" type="email" name="email" id="lastNameInput">
+                      </form>
+
+                      <div id="payment-form-container">
+                        <div id="stripe-card" style="display: none">
+                            <form id="payment-form">
+                                <div id="payment-element">
+                                </div>
+                                <button id="stripe-submit" class="btn btn-primary mt-3">
+                                    {% trans 'Pay Now' %}
+                                </button>
+                            </form>
+                        </div>
+                      </div>
+                      
+                    </div>
+                  </section>
+                </div>
+
+                <div class="ipsColumn ipsColumn_veryWide">
+                  <h2 class="ipsType_sectionHead">مراجعة الطلب</h2>
+                  <ul class="ipsDataList ipsDataList_reducedSpacing ipsSpacer_top">
+                    
+                    {% for course in cart_courses %}
+                    
+                      <li class="ipsDataItem">
+                        <div class="ipsDataItem_generic ipsDataItem_size1">
+                          <img src="{{ course.pic.url }}" class="ipsImage ipsThumb_tiny" />
+                        </div>
+                        <div class="ipsDataItem_main">
+                          <span class="ipsType_medium"><span class="ipsType_light">1 x  </span>{{ course.title }}</span>
+                        </div>
+                        <div class="ipsDataItem_generic ipsDataItem_size4 ipsType_right">
+                          <span class="cNexusPrice ipsType_normal">{{ course.price }}$</span>
+                        </div>
+                      </li>
+                    
+                    {% endfor %}
+
+
+                    <li class="ipsDataItem ipsType_large cNexusCheckout_subtotal">
+                      <div class="ipsDataItem_main ipsType_right">
+                        <strong>{% trans "Total" %}</strong>
+                      </div>
+                      <div class="ipsDataItem_generic ipsDataItem_size3 ipsType_right cNexusPrice">
+                        <strong>{{ cart_total }}$</strong>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+{% endblock %}

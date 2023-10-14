@@ -1,0 +1,63 @@
+{% extends "HOD/elements/base.html" %}
+
+{% block title %}
+  Admin - Add Staff
+{% endblock title %}
+
+
+{% block content %}
+
+  <p>
+    <a href="{% url "staffs" %}">Staffs</a> / <a href="{% url "add_staff" %}">Add Staff</a>
+  </p>
+
+  <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Add </span> Staff</h4>
+  <div class="row">
+
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-body demo-vertical-spacing demo-only-element">
+          
+          <form action="{% url "add_staff" %}" method="POST" enctype="multipart/form-data"> 
+            {% csrf_token %}
+            
+            <div class="input-group mb-3">
+              <span class="input-group-text">Full name</span>
+              <input type="text" aria-label="First name" class="form-control" spellcheck="false" data-ms-editor="true" placeholder="First name..." name="first_name" required>
+              <input type="text" aria-label="Last name" class="form-control" spellcheck="false" data-ms-editor="true" placeholder="Last name..." name="last_name" required>
+            </div>
+
+            <div class="input-group mb-3">
+              <input type="email" class="form-control" placeholder="Email hare..." aria-label="Email..." aria-describedby="email-addon" spellcheck="false" data-ms-editor="true" name="email" required>
+              <span class="input-group-text" id="email-addon">Email</span>
+            </div>
+
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="username-addon">@</span>
+              <input type="text" class="form-control" placeholder="Username..." aria-label="Username..." aria-describedby="username-addon" spellcheck="false" data-ms-editor="true" name="username" required>
+            </div>
+
+            <div class="form-password-toggle mb-3">
+              <label class="form-label" for="password">Password</label>
+              <div class="input-group">
+                <input type="password" class="form-control" id="password" placeholder="········" aria-describedby="password" name="password" required>
+                <span id="password" class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label" for="pic">Profile Picture</label>
+              <input type="file" class="form-control" id="pic" name="profile_pic">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+
+          </form>
+        </div>
+      </div>
+    </div>
+
+  </div>
+{% endblock content %}
+
+

@@ -1,0 +1,406 @@
+{% load static %}
+{% load i18n %}
+<!DOCTYPE html>
+<html lang="ar" dir="lrt" style="--zaetoon-client-theme-color: #616571;">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <link rel="stylesheet" href="https://static.hsoubcdn.com/../assets/fonts/css/OpenSans.css" media="all">
+  <link rel="stylesheet" href="https://static.hsoubcdn.com/../assets/fonts/css/NotoArabic.css" media="all">
+
+  <!-- meta tags -->
+  <link rel="canonical" href="">
+  <title>{% trans "Hsoub Academy" %}</title>
+
+
+  <script src="{% static "assets/js/bootstrap.bundle.min.js" %}"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="{% static "assets/js/jquery.min.js" %}"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="{% static "assets/js/popper.min.js" %}"
+    integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+    crossorigin="anonymous"></script>
+  <link href="{% static "assets/css/bundle.css" %}" rel="stylesheet">
+  <link href="{% static "assets/css/style.css" %}" rel="stylesheet">
+
+  <!-- gtag script -->
+  <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-D6HLCHN9ES"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-D6HLCHN9ES");
+
+    gtag("event", "view_item", {
+      currency: "USD",
+      value: 290,
+      items: [
+        {
+          item_id: "5",
+          item_name: "javascript-application-development",
+          price: 290,
+        }
+      ]
+    });
+  </script>
+
+  <style>
+    :root {
+      --yellow: #f7df1e;
+      --main: #003049;
+      --hover: #333;
+    }
+
+    nav.navbar-light {
+      background-color: var(--yellow) !important;
+    }
+
+    nav.navbar-light .navbar-nav a.nav-link {
+      color: rgba(0, 0, 0, 0.55) !important;
+    }
+
+    nav.navbar-light .btn,
+    #pay-button {
+      color: rgba(0, 0, 0, 0.55) !important;
+    }
+
+    #pay-button {
+      color: white !important;
+    }
+  </style>
+
+  <link rel="shortcut icon" href="{% static "assets/images/logos/icon.ico" %}" type="image/x-icon">
+
+</head>
+
+<body>
+  <main>
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container main-container">
+        <a class="navbar-brand" href="/">
+          <img width="144" src="{% static "assets/images/logos/academy-logo-dark.svg" %}" alt="{% trans " Hsoub academy
+            logo" %}">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarPageSections"
+          aria-controls="navbarPageSections" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarPageSections">
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link" href="#about-course"> {% trans "About course" %} </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#course-list">{% trans "Course list" %}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#features-section">{% trans "Features" %}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#certificate">{% trans "Certificate" %}</a>
+            </li>
+          </ul>
+          <form class="form-inline">
+            <a href="#payment" class="btn btn-light btn-lg">{% trans "Buy Now" %}</a>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <!-- hero section -->
+    <div class="hero">
+      <div class="container main-container">
+        <div class="row">
+          <div class="col-lg-5 text-start mb-5">
+            <h1 class="hero-title">
+              {{ course.title }}
+            </h1>
+            <div class="hero-description list-video">
+              <ul>
+                <li>
+                  <span class="check-icon">
+                    <svg width="20" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z">
+                      </path>
+                    </svg>
+                  </span>
+                  61 {% trans "Hours of videos" %}
+                </li>
+                <li>
+                  <span class="check-icon">
+                    <svg width="20" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z">
+                      </path>
+                    </svg>
+                  </span>
+                  {% trans "From scratch without the need for prior experience" %}
+                </li>
+                <li>
+                  <span class="check-icon">
+                    <svg width="20" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z">
+                      </path>
+                    </svg>
+                  </span>
+                  {% trans "Accredited certificate from Hassoub Academy" %}
+                </li>
+                <li>
+                  <span class="check-icon">
+                    <svg width="20" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z">
+                      </path>
+                    </svg>
+                  </span>
+                  {% trans "Follow-up during and after the course by a specialized team" %}
+                </li>
+                <li>
+                  <span class="check-icon">
+                    <svg width="20" height="20" viewBox="0 0 1792 1792" xmlns="http://www.w3.org/2000/svg">
+                      <path
+                        d="M1412 734q0-28-18-46l-91-90q-19-19-45-19t-45 19l-408 407-226-226q-19-19-45-19t-45 19l-91 90q-18 18-18 46 0 27 18 45l362 362q19 19 45 19 27 0 46-19l543-543q18-18 18-45zm252 162q0 209-103 385.5t-279.5 279.5-385.5 103-385.5-103-279.5-279.5-103-385.5 103-385.5 279.5-279.5 385.5-103 385.5 103 279.5 279.5 103 385.5z">
+                      </path>
+                    </svg>
+                  </span>
+                  {% trans "Guaranteed to recover your investment within six months" %}
+                </li>
+              </ul>
+            </div>
+            <a class="btn btn-primary btn-lg me-2 mt-3" href="#payment">
+              {% trans "Buy Now" %}
+            </a>
+            <a class="btn btn-outline-primary btn-lg mt-3" href="#course-list">
+              {% trans "More info" %}
+            </a>
+          </div>
+          <div class="col-lg-7 ms-auto align-self-center">
+            <div class="ratio ratio-16x9">
+              <img src="{{ course.pic.url }}" alt="" width="560" height="315" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white" id="about-course">
+      <div class="container main-container">
+        <div class="features-section block">
+          <div class="main-block">
+            <h2 class="main-block-title">{% trans "About the course" %}</h2>
+          </div>
+          <div class="row">
+            <div class="col-md-8 m-auto">
+              <div class="features">
+                <p>
+                  {{ course.description }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- course section -->
+    <div class="collapse-course" id="course-list">
+      <div class="container main-container">
+        <div class="block">
+          <div class="main-block">
+            <h2 class="main-block-title">{% trans "Course roadmap" %}</h2>
+          </div>
+          <div class="row">
+            <div class="col-md-8 offset-md-2">
+              <div class="accordion" id="coursesAccordion">
+
+                {% for subtitle in subtitles %}
+
+                <div class="accordion-item" id="course538">
+
+                  <h2 class="accordion-header" id="courseHeader538">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                      data-bs-target="#courseModules538" aria-expanded="false" aria-controls="courseModules538">
+                      <span class="course-list-title">
+                        <!-- اسم المسار -->
+                        {{ subtitle.subtitle }}
+                      </span>
+
+                    </button>
+                  </h2>
+
+                  <div id="courseModules538" class="accordion-collapse collapse" aria-labelledby="courseHeader538"
+                    data-bs-parent="#coursesAccordion">
+                    <div class="accordion-body">
+                      <div class="sub-accordion" id="courseModulesAccordion538">
+
+                        {% for video in subtitle.coursevideo_set.all %}
+
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="courseModule538-0">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                              data-bs-target="#courseModuleContent538-0" aria-expanded="false"
+                              aria-controls="courseModuleContent538-0">
+                              <span class="course-list-title">
+                                <!-- اسم الوحدة -->
+                                {{ video.title }}
+                              </span>
+
+                            </button>
+                          </h2>
+                          <!-- معلومات دروس الوحدة -->
+                          <!-- courseModuleContentx-y -->
+                          <div id="courseModuleContent538-0" class="accordion-collapse collapse"
+                            aria-labelledby="courseModule538-0" data-bs-parent="#courseModulesAccordion538">
+
+                            <div class="accordion-body course-content-item">
+                              <p>{{ video.title }}</p>
+
+                            </div>
+                          </div>
+
+                          {% endfor %}
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {% endfor %}
+
+                </div>
+              </div>
+            </div>
+            <!-- video player modal -->
+            <div class="modal fade" id="videoPlayer" tabindex="-1" aria-labelledby="recordTitle" aria-hidden="true">
+              <div class="modal-dialog modal-xl">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="recordTitle">اسم الدرس</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="ratio ratio-16x9">
+                      <iframe src="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen=""></iframe>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                      إغلاق
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Certificate -->
+      <div class="bg-white" id="certificate">
+        <div class="container main-container">
+          <div class="features-section block">
+            <div class="with-image pb-90">
+              <div class="main-block">
+                <h2 class="main-block-title">{% trans "Accredited certification" %}</h2>
+                <p class="main-block-paragraph">
+
+                  {% blocktrans %}
+                    All certificates issued by Hsoub Academy are issued only after passing the exam passed
+                    successfully and is available with a direct link on the academy’s website, which allows verify its
+                    authenticity at any time
+                  {% endblocktrans %}
+                </p>
+              </div>
+              <div class="row">
+                <div class="col-lg-8 m-auto mt-3">
+                  <img src="{% static "assets/images/certificates/front-end-web-development.png" %}" loading="lazy"
+                    class="img-fluid image-box-shadow" alt="شهادة أكاديمية حسوب">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Grid section -->
+      <div class="grid three-column bg-white">
+        <div class="container main-container">
+          <div class="block">
+            <div class="main-block">
+              <h2 class="main-block-title">{% trans "You may also be interested" %}</h2>
+            </div>
+            <div class="row">
+              {% for c in courses %}
+              {% if c != course %}
+              <div class="col-md-4 mb-30">
+                <a href="{% url "academy.course_details" c.id %}">
+                  <img src="{{ c.pic.url }}" width="100%" alt="{{ c.title }}">
+                </a>
+              </div>
+              {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer section -->
+      <footer>
+        <div class="middle-footer mt-0">
+          <div class="container main-container">
+            <div class="row">
+              <div class="col-md-6 align-self-center">
+                <p class="font-bold text-sm-center text-md-start mb-0">
+                  ©
+                  <script>
+                    document.write(new Date().getFullYear());
+                  </script>
+                  {% trans "All rights are saved!" %}
+                </p>
+              </div>
+              <div class="col-md-6 text-end">
+                <ul class="middle-footer-menu">
+                  <li>
+                    <a class="middle-footer-menu-link" href="#payment">
+                      <img src="{% static "assets/images/logos/mastercard.svg" %}" width="30px" alt="mastercard">
+                    </a>
+                  </li>
+                  <li>
+                    <a class="middle-footer-menu-link" href="#payment">
+                      <img src="{% static "assets/images/logos/visa.svg" %}" width="30px" alt="visa">
+                    </a>
+                  </li>
+                  <li>
+                    <a class="middle-footer-menu-link" href="#payment">
+                      <img src="{% static "assets/images/logos/paypal.svg" %}" width="50px" alt="paypal">
+                    </a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </footer>
+
+
+</main>
+
+  <!-- payment script -->
+  <script src="{% static "assets/js/payment.js" %}"></script>
+  <!-- coupon script -->
+  <script src="{% static "assets/js/coupon.js" %}"></script>
+
+  <script type="text/javascript" src="{% static "assets/js/video-preview.js" %}"></script>
+
+</body>
+
+</html>

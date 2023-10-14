@@ -1,0 +1,60 @@
+{% extends "HOD/elements/base.html" %}
+
+{% load static %}
+
+{% block title %}
+  Admin - Courses
+{% endblock title %}
+
+{% block content %}
+
+  <p>
+    <a href="{% url "courses" %}">Courses</a> / <a href="{% url "course_profile" course.id %}">{{ course.title }}</a>
+  </p>
+
+  <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Course / </span> {{ course.title }}</h4>
+
+  <div class="row mb-5">
+    <div class="col-md">
+      <div class="card mb-3">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img class="card-img card-img-left" src="{{ course.pic.url }}" alt="Card image">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h5 class="card-title">{{ course.title }}</h5>
+              <p class="card-text">
+                {{ course.description }}
+              </p>
+              <p class="card-text"><span class="text-muted">{{ course.price }}$</span></p>
+            </div>
+
+            <div class="card-footer">
+              <a href="{% url "edit_course" course.id %}" class="btn btn-success mt-3">Edit</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+
+  <a href="{% url "add_course_subtitle" course.id %}" class="btn btn-primary mb-4">Add New Subtitle</a>
+
+  <div class="card">
+    <h5 class="card-header">All Subtitles of this course:</h5>
+    <div class="table-responsive text-nowrap">
+      <table class="table">
+        <tbody class="table-border-bottom-0">
+          {% for subtitle in subtitles %}
+            <tr>
+              <td><strong><a href="{% url "course_subtitle_profile" course.id subtitle.id %}">{{ subtitle.subtitle }}</a></strong></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+{% endblock content %}
