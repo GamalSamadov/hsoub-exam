@@ -4,6 +4,7 @@ from django.utils.translation import gettext as _
 from django.views.decorators.csrf import csrf_exempt
 from hsoub import settings
 from academy.models import Course, Cart, Course, Order
+from account.models import User
 from checkout.models import Transaction, PaymentMethod
 from checkout.forms import UserInfoForm
 import math, stripe
@@ -46,6 +47,7 @@ def stripe_config(request):
     })
 
 
+@csrf_exempt
 def stripe_transaction(request):
     transaction = make_transaction(request, PaymentMethod.Stripe)
     if not transaction:
@@ -86,23 +88,25 @@ def stripe_transaction(request):
 #     return HttpResponse(form.render())
 
 
+@csrf_exempt
 def make_transaction(request, pm):
-    form = UserInfoForm(request.POST)
-    if form.is_valid():
-        cart = Cart.objects.filter(session=request.session.session_key).last()
-        courses = Course.objects.filter(pk__in=cart.items)
 
-        total = 0
-        for item in courses:
-            total += item.price
+    cart = Cart.objects.filter(session=request.session.session_key).last()
+    courses = Course.objects.filter(pk__in=cart.items)
 
-        if total <= 0:
-            return None
+    total = 0
+    for item in courses:
+        total += item.price
 
-        return Transaction.objects.create(
-            customer=form.cleaned_data,
-            session=request.session.session_key,
-            payment_method=pm,
-            items=cart.items,
-            amount=math.ceil(total)
-        )
+    if total <= 0:
+        return None
+
+    user = request.user
+    user_model = User.objects.get(id=user.id)
+    return Transaction.objects.create(
+        customer=user_model,
+        session=request.session.session_key,
+        payment_method=pm,
+        items=cart.items,
+        amount=math.ceil(total)
+    )

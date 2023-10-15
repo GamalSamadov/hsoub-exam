@@ -5,12 +5,10 @@ async function createStripeSession() {
 
   // switchPaymentMethod('stripe', '')
 
-  const form = document.getElementById('form-user-info');
-  const formData = new FormData(form);
 
   stripeSubmit.disabled = true;
   try {
-    const { data } = await axios.post("/checkout/stripe", formData)
+    const { data } = await axios.post("/checkout/stripe")
     const { client_secret } = data;
 
     const appearance = { theme: 'flat' };
@@ -72,7 +70,7 @@ async function _checkStripePaymentStatus() {
 
 async function _stripeInit() {
     const { data } = await axios("/checkout/stripe/config");
-    stripe = Stripe(data.public_key, { locale: 'ar' });
+    stripe = Stripe(data.public_key, { locale: 'en' });
     _checkStripePaymentStatus();
 }
 

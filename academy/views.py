@@ -133,3 +133,5 @@ def checkout(request):
 def checkout_complate(request):
   Cart.objects.filter(session=request.session.session_key).delete()
   return render(request, "academy/index.html")
+
+

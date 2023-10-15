@@ -31,7 +31,7 @@ class LoginCheckMiddleWare(MiddlewareMixin):
             elif user.user_type == "3":
                 if modulename == "academy.views":
                     pass
-                elif modulename == "account.views" or modulename == "django.views.static":
+                elif modulename == "account.views" or modulename == "django.views.static" or modulename == "checkout.views":
                     pass
                 else:
                     return redirect("home")
