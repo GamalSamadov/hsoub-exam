@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from account.models import Staff, Member, User
-from academy.models import Course, CourseSubTitle, CourseVideo
+from academy.models import Course, CourseSubTitle, CourseVideo, OrderCourse
 
 
 # Home
@@ -613,11 +613,13 @@ def add_course_video(request, courseId, subtitleId):
   if request.method == 'POST':
     subtitle = CourseSubTitle.objects.get(id=subtitleId)
     title = request.POST.get("title")
+    description = request.POST.get("description")
     video = request.FILES.get("video")
     print(video)
     try:
       CourseVideo.objects.create(
         subtitle=subtitle,
+        description=description,
         title=title,
         video=video,
       )
@@ -664,11 +666,14 @@ def edit_course_video(request, courseId, subtitleId, videoId):
     return render(request, "HOD/edit_course_video.html", context)
   elif request.method == 'POST':
     title = request.POST.get("title")
-    video = request.POST.get("video")
+    description = request.POST.get("description")
+    video = request.FILES.get("video")
     try:
       course_video = CourseVideo.objects.get(id=videoId) 
       course_video.title = title
+      course_video.description = description
       course_video.video = video
+      
       course_video.save()
       messages.success(request, "Edited successfully!")
       return redirect("course_video_profile", courseId=courseId, subtitleId=subtitleId, videoId=videoId)
@@ -688,5 +693,31 @@ def delete_course_video(request, courseId, subtitleId, videoId):
   except:
     messages.error(request, "Failed to delete video!")
     return redirect("course_subtitle_profile", courseId=courseId, subtitleId=subtitleId)
+
+
+def orders(request):
+
+  orders = OrderCourse.objects.all()
+
+  context = {
+    "orders": orders,
+  }
+
+  return render(request, "HOD/orders.html", context)
+
+
+def approve_order(request, oid):
+
+  order = OrderCourse.objects.get(id=oid)
+
+  try:
+    order.approved = True
+    order.save()
+    messages.success(request, "The order was been approved!")
+    return redirect("hod.orders")
+  
+  except:
+    messages.error(request, "There was error while approving the order!")
+    return redirect("hod.orders")
 
 

@@ -1,0 +1,66 @@
+{% extends 'academy/elements/base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+  {% trans 'Hsoub Academy -' %} {{ course.title }} / {{ subtitle.subtitle }} / {{ video.title }}
+{% endblock %}
+
+{% block content %}
+  <nav class="ipsBreadcrumb ipsBreadcrumb_top ipsFaded_withHover">
+
+    <ul data-role="breadcrumbList">
+      <li>
+        <a title="home" href="{% url 'home' %}"> <span> {% trans "Home" %} <i class="fa fa-angle-right"></i> </span> </a>
+      </li>
+
+      <li>
+        <a href="{% url 'academy.my_courses' %}"> <span> {% trans "My Courses" %} <i class="fa fa-angle-right"></i> </span> </a>
+      </li>
+      <li>
+        <a href="{% url 'academy.subtitles' course.id %}"> <span> {{ course.title }} </span> <i class="fa fa-angle-right"></i> </a>
+      </li>
+      <li>
+        <a href="{% url 'academy.videos' course.id subtitle.id %}"> <span> {{ subtitle.subtitle }} </span> <i class="fa fa-angle-right"></i>  </a>
+      </li>
+      <li>
+        <a href="{% url 'academy.video' course.id subtitle.id video.id %}"> <span> {{ video.title }} </span>  </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div id="ipsLayout_mainArea">
+    <div id="elCmsPageWrap" data-pageid="21">
+
+      <section class="ipsBox ipsResponsive_pull">
+        <ol class="ipsList_reset cCmsDatabase_index" data-controller="core.global.core.table, forums.front.forum.forumList" data-baseurl="">
+          <li class="cForumRow">
+            <h2 class="ipsType_sectionTitle ipsType_reset ipsType_blendLinks">{{ video.title }}</h2>
+
+            <video width="100%" height="100%" controls>
+              <source src="{{ video.video.url }}" type="video/mp4">
+              <source src="{{ video.video.url }}" type="video/ogg">
+              Your browser does not support the video tag.
+            </video>
+
+            <p>
+              {% if video.description %}
+                {{ video.description }}
+              {% endif %}
+            </p>
+            
+          </li>
+        </ol>
+      </section>
+    </div>
+
+    <br>
+
+  </div>
+
+  <div id="ipsLayout_sidebar" class="ipsLayout_sidebarright" data-controller="core.front.widgets.sidebar">
+  </div>
+
+
+{% endblock %}

@@ -37,4 +37,7 @@ urlpatterns = [
     path("course/<int:courseId>/subtitle/<int:subtitleId>/video/<int:videoId>/edit/", edit_course_video, name="edit_course_video"),
     path("course/<int:courseId>/subtitle/<int:subtitleId>/video/<int:videoId>/delete/", delete_course_video, name="delete_course_video"),
 
+    path("orders/", orders, name="hod.orders"),
+    path("orders/approve/<int:oid>", approve_order, name="hod.order.approve"),
+
 ]

@@ -31,18 +31,18 @@ class LoginCheckMiddleWare(MiddlewareMixin):
             elif user.user_type == "3":
                 if modulename == "academy.views":
                     pass
-                elif modulename == "account.views" or modulename == "django.views.static" or modulename == "checkout.views":
+                elif modulename == "account.views" or modulename == "django.views.static" or modulename == "checkout.views" or modulename == "checkout.webhooks":
                     pass
                 else:
                     return redirect("home")
 
             else:
-                    return redirect("login")
+                return redirect("login")
 
         else:
             if modulename == "academy.views":
                 pass
-            elif modulename == "account.views" or modulename == "django.views.static":
+            elif modulename == "account.views" or modulename == "django.views.static" or modulename == "checkout.views" or modulename == "checkout.webhooks":
                 pass
             else:
                 return redirect("home")

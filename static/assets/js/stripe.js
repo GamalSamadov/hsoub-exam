@@ -40,9 +40,33 @@ async function _stripeFormSubmit(e) {
   });
 
   if (error.type === "card_error" || error.type === "validation_error") {
-    notyf.error(error.message);
+    Toastify({
+      text: error.message,
+      duration: 3000,
+      newWindow: true,
+      close: true,
+      gravity: 'top',
+      position: 'right',
+      stopOnFocus: true,
+      style: {
+        background: 'linear-gradient(to right, #b02f00, #96572d)'
+      },
+      onClick: function () {} // Callback after click
+    }).showToast()
   } else {
-    notyf.error("عذرًا، هنالك خطأ ما حصل خلال عملية الدفع.");
+    Toastify({
+      text: "Sorry, an error occurred during the payment process.",
+      duration: 3000,
+      newWindow: true,
+      close: true,
+      gravity: 'top',
+      position: 'right',
+      stopOnFocus: true,
+      style: {
+        background: 'linear-gradient(to right, #b02f00, #96572d)'
+      },
+      onClick: function () {} // Callback after click
+    }).showToast()
   }
   stripeSubmit.disabled = false;
 }
@@ -57,13 +81,49 @@ async function _checkStripePaymentStatus() {
   const { paymentIntent } = await stripe.retrievePaymentIntent(clientSecret);
   switch (paymentIntent.status) {
     case "succeeded":
-      notyf.success("لقد تمت عملية الدفع بنجاح!");
+      Toastify({
+        text: 'The payment was completed successfully',
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: 'top',
+        position: 'right',
+        stopOnFocus: true,
+        style: {
+          background: 'linear-gradient(to right, #00b09b, #70962d)'
+        },
+        onClick: function () {} // Callback after click
+      }).showToast()
       break;
     case "processing":
-      notyf.success("عملية الدفع قيد المعالجة");
+      Toastify({
+        text: 'The payment is being processed',
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: 'top',
+        position: 'right',
+        stopOnFocus: true,
+        style: {
+          background: 'linear-gradient(to right, #00b09b, #70962d)'
+        },
+        onClick: function () {} // Callback after click
+      }).showToast()
       break;
     default:
-      notyf.error("عذرًا، هنالك خطأ ما حصل خلال عملية الدفع.");
+      Toastify({
+        text: "Sorry, there was an error during the payment process",
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: 'top',
+        position: 'right',
+        stopOnFocus: true,
+        style: {
+          background: 'linear-gradient(to right, #b02f00, #96572d)'
+        },
+        onClick: function () {} // Callback after click
+      }).showToast()
       break;
   }
 }

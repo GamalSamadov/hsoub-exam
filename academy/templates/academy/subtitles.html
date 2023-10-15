@@ -1,0 +1,95 @@
+{% extends 'academy/elements/base.html' %}
+
+{% load i18n %}
+{% load static %}
+
+{% block title %}
+  {% trans 'Hsoub Academy -' %} {{ course.title }}
+{% endblock %}
+
+{% block content %}
+  <nav class="ipsBreadcrumb ipsBreadcrumb_top ipsFaded_withHover">
+
+    <ul data-role="breadcrumbList">
+      <li>
+        <a title="home" href="{% url 'home' %}"> <span>{% trans "Home" %} <i class="fa fa-angle-right"></i> </span> </a>
+      </li>
+      
+      <li>
+        <a href="{% url 'academy.my_courses' %}"> <span> {% trans "My Courses" %} <i class="fa fa-angle-right"></i> </span> </a>
+      </li>
+
+      <li>
+        <a href="{% url 'academy.subtitles' course.id %}"> <span>{{ course.title }}</span> </a>
+      </li>
+    </ul>
+  </nav>
+
+  <div id="ipsLayout_mainArea">
+    <div id="elCmsPageWrap" data-pageid="21">
+
+      <section class="ipsBox ipsResponsive_pull">
+        <ol class="ipsList_reset cCmsDatabase_index" data-controller="core.global.core.table, forums.front.forum.forumList" data-baseurl="">
+          <li class="cForumRow">
+            <h2 class="ipsType_sectionTitle ipsType_reset ipsType_blendLinks">{% trans "My Courses" %}</h2>
+
+            <ol class="ipsDataList ipsDataList_large ipsDataList_zebra">
+
+             {% for subtitle in subtitles %}
+             
+              <li class="ipsDataItem ipsDataItem_responsivePhoto coursePaddingFix ipsClearfix ipsPadding">
+                <div class="ipsDataItem_main ipsPos_middle">
+                  <h4 class="ipsDataItem_title ipsType_large">
+                    <a href="{% url 'academy.subtitles' subtitle.course.id %}">
+                      {{ subtitle.subtitle }}
+                    </a>
+                  </h4>
+
+                  <ul>
+                    {% for video in subtitle.coursevideo_set.all %}
+                    
+                      <li class="ipsButton ipsButton_light ipsButton_verySmall">
+                        <a href="{% url 'academy.videos' subtitle.course.id subtitle.id %}">
+                          {{ video.title }}
+                        </a>
+                      </li>
+
+                    {% endfor %}
+                  </ul>
+
+                  <div class="ipsDataItem_meta ipsType_richText"></div>
+                </div>
+              </li>
+             
+             {% endfor %}
+
+            </ol>
+          </li>
+        </ol>
+      </section>
+    </div>
+
+    <br>
+    <div class="cWidgetContainer" data-role="widgetReceiver" data-orientation="horizontal" data-widgetarea="footer">
+      <ul class="ipsList_reset">
+        <li class="ipsWidget ipsWidget_horizontal ipsBox" data-blockid="app_cms_Wysiwyg_7nwfzz2on" data-blockconfig="true" data-blocktitle="WYSIWYG Editor" data-blockerrormessage="This block cannot be shown. This could be because it needs configuring, is unable to show on this page, or will show after reloading this page." data-controller="core.front.widgets.block">
+          <div class="ipsWidget_inner ipsPad ipsType_richText" data-controller="core.front.core.lightboxedImages">
+            <p>
+              <span style="color:#808080;font-size:13px;">
+              {% trans "All rights are save. No parts of this course may be republished, distributed, copied or quoted without prior permission. If you see any part of this course pirated online or elsewhere, please let us know." %}
+              </span><br />
+              <span style="color:#808080;font-size:13px;">
+                {% trans "Thank you for respecting copyright. This helps us invest in high-quality Arabic content and develop more specialized courses." %}
+              </span>
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="ipsLayout_sidebar" class="ipsLayout_sidebarright" data-controller="core.front.widgets.sidebar">
+  </div>
+
+
+{% endblock %}

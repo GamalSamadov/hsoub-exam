@@ -1,47 +1,71 @@
 {% load i18n %}
 {% load static %}
 
+{% url 'home' as home %}
+{% url 'home' as home %}
+{% url 'academy.my_courses' as my_courses %}
+{% url 'questions' as questions %}
+{% url 'questions' as questions %}
+{% url 'store' as store %}
+
 <div id="ipsLayout_header" class="ipsClearfix">
   <header>
     <div class="ipsLayout_container">
-      <a href="{% url 'home' %}" id="elLogo" accesskey="1"><img src="{% static 'assets/images/logos/HsoubAcademyLogo.png' %}" alt="{% trans 'Hsoub Academy' %}" /></a>
+      <a href="{% url 'home' %}" id="elLogo" accesskey="1"><img
+          src="{% static 'assets/images/logos/HsoubAcademyLogo.png' %}" alt="{% trans 'Hsoub Academy' %}" /></a>
 
       {% if user.is_authenticated %}
-        <ul id="elUserNav" class="ipsList_inline cSignedIn ipsResponsive_showDesktop" data-controller="core.front.core.userbar,core.front.core.instantNotifications">
-          <li class="elUserNav_sep"></li>
-          <li class="cUserNav_icon ipsHide" id="elCart_container"></li>
-          <li class="elUserNav_sep ipsHide" id="elCart_sep"></li>
+      <ul id="elUserNav" class="ipsList_inline cSignedIn ipsResponsive_showDesktop"
+        data-controller="core.front.core.userbar,core.front.core.instantNotifications">
+        <li class="elUserNav_sep"></li>
+        <li class="cUserNav_icon ipsHide" id="elCart_container"></li>
+        <li class="elUserNav_sep ipsHide" id="elCart_sep"></li>
 
-          <li class="cUserNav_icon" id="elCart_container">
-            <a href="{% url "academy.store.cart" %}" id="elCart">
-              <i class="fa fa-shopping-cart"></i> <span class="ipsNotificationCount" id="cart-items-count">{{ cart_courses|length }}</span>
-              &nbsp;{% trans "Cart" %} </i>
-            </a>
-            
-          </li>
+        <li class="cUserNav_icon" id="elCart_container">
+          <a href="{% url "academy.store.cart" %}" id="elCart">
+            <i class="fa fa-shopping-cart"></i> 
+            <span class="ipsNotificationCount" id="cart-items-count">
+              {{ cart.courses|length }}
+            </span>
+            &nbsp; {% trans "Cart" %}
+          </a>
 
-          <li id="cUserLink">
-            <a href="#" rel="nofollow" data-ipshover="" data-ipshover-width="370" data-ipshover-target="" class="ipsUserPhoto ipsUserPhoto_tiny" id="ips_uid_7776_3"></a>
+        </li>
 
-            <a href="#elUserLink_menu" id="elUserLink" data-ipsmenu="" style="">{{ user.first_name }} {{ user.last_name }} <i class="fa fa-caret-down"></i></a>
-          </li>
-        </ul>
+        <li id="cUserLink">
+
+          <a href="#">{{ user.first_name }} {{ user.last_name }}
+           </a>
+          <a href="#" rel="nofollow" data-ipshover="" data-ipshover-width="370" class="ipsUserPhoto ipsUserPhoto_tiny"
+            id="ips_uid_6538_15">
+            {% if user.member.profile_pic %}
+            <img src="{{ user.member.profile_pic.url }}" alt="{{ user.username }}" loading="lazy">
+            {% else %}
+              <img src="{% static "dashboard/img/icons/user/user_icon.png" %}" alt="{{ user.username }}" loading="lazy">
+            {% endif %}
+          </a>
+        </li>
+        <li id="elSignInLink">
+          <a href="{% url 'logout' %}">{% trans 'Logout' %}</a>
+        </li>
+      </ul>
       {% else %}
-        <ul id="elUserNav" class="ipsList_inline cSignedOut ipsResponsive_showDesktop">
-          <li class="cUserNav_icon ipsHide" id="elCart_container"></li>
-          <li class="elUserNav_sep ipsHide" id="elCart_sep"></li>
-          <li id="elSignInLink">
-            <a href="{% url 'login' %}">{% trans 'Login' %}</a>
-          </li>
-          <li>
-            <a href="{% url 'register' %}" target="_blank" rel="noopener" class="ipsButton ipsButton_normal ipsButton_primary">{% trans 'Register' %}</a>
-          </li>
-        </ul>
-        <ul class="ipsMobileHamburger ipsList_reset ipsResponsive_hideDesktop">
-          <li data-ipsdrawer="" data-ipsdrawer-drawerelem="#elMobileDrawer">
-            <a href="#"><i class="fa fa-navicon"></i></a>
-          </li>
-        </ul>
+      <ul id="elUserNav" class="ipsList_inline cSignedOut ipsResponsive_showDesktop">
+        <li class="cUserNav_icon ipsHide" id="elCart_container"></li>
+        <li class="elUserNav_sep ipsHide" id="elCart_sep"></li>
+        <li id="elSignInLink">
+          <a href="{% url 'login' %}">{% trans 'Login' %}</a>
+        </li>
+        <li>
+          <a href="{% url 'register' %}" target="_blank" rel="noopener"
+            class="ipsButton ipsButton_normal ipsButton_primary">{% trans 'Register' %}</a>
+        </li>
+      </ul>
+      <ul class="ipsMobileHamburger ipsList_reset ipsResponsive_hideDesktop">
+        <li data-ipsdrawer="" data-ipsdrawer-drawerelem="#elMobileDrawer">
+          <a href="#"><i class="fa fa-navicon"></i></a>
+        </li>
+      </ul>
       {% endif %}
     </div>
   </header>
@@ -49,112 +73,49 @@
   <nav data-controller="core.front.core.navBar" class="ipsResponsive_showDesktop" id="ips_uid_8578_2">
     <div class="ipsNavBar_primary ipsLayout_container">
       <ul data-role="primaryNavBar" class="ipsClearfix">
-        <li class="ipsNavBar_active" data-active="" id="elNavSecondary_2" data-role="navBarItem" data-navapp="cms" data-navext="Pages" style="" data-originalwidth="89.7812">
+
+        <li class="{% if request.path == home %}ipsNavBar_activate{% else %}ipsNavBar{% endif %}">
           <a href="{% url 'home' %}" data-navitem-id="2" data-navdefault="" data-active="true">
             {% trans 'Home' %}
-            <span class="ipsNavBar_active__identifier"></span>
           </a>
-          <ul class="ipsNavBar_secondary" data-role="secondaryNavBar">
-            <li id="elNavSecondary_42" data-role="navBarItem" data-navapp="core" data-navext="Menu" style="" data-originalwidth="76.9922">
-              <a href="#" id="elNavigation_42" data-ipsmenu="" data-ipsmenu-appendto="#elNavSecondary_2" data-ipsmenu-activeclass="ipsNavActive_menu" data-navitem-id="42">
-                {% trans 'Fallow Us' %}
-                <i class="fa fa-caret-down"></i><span class="ipsNavBar_active__identifier"></span>
-              </a>
-              <ul id="elNavigation_42_menu" class="ipsMenu ipsMenu_auto ipsHide">
-                <li class="ipsMenu_item">
-                  <a href="#" target="_blank" rel="noopener">{% trans 'Twitter' %}</a>
-                </li>
-                <li class="ipsMenu_item">
-                  <a href="http://www.facebook.com/HsoubAcademy" target="_blank" rel="noopener">{% trans 'Facebook' %}</a>
-                </li>
-                <li class="ipsMenu_item">
-                  <a href="https://www.youtube.com/channel/UCJv37tcBvJlBF2MoVMRMvbQ" target="_blank" rel="noopener">{% trans 'Youtube' %}</a>
-                </li>
-              </ul>
-            </li>
-            <li id="elNavSecondary_87" data-role="navBarItem" data-navapp="core" data-navext="CustomItem" style="" data-originalwidth="142.414">
-              <a href="#" target="_blank" rel="noopener" data-navitem-id="87">
-                {% trans 'Wiki Hsoub' %}
-                <i class="fa fa-external-link"></i><span class="ipsNavBar_active__identifier"></span>
-              </a>
-            </li>
-            <li class="ipsHide" id="elNavigationMore_2" data-role="navMore" style="">
-              <a href="#" data-ipsmenu="" data-ipsmenu-appendto="#elNavigationMore_2" id="elNavigationMore_2_dropdown">المزيد <i class="fa fa-caret-down"></i></a>
-              <ul class="ipsHide ipsMenu ipsMenu_auto" id="elNavigationMore_2_dropdown_menu" data-role="moreDropdown"></ul>
-            </li>
-          </ul>
         </li>
 
-        <li id="elNavSecondary_9" data-role="navBarItem" data-navapp="forums" data-navext="Forums" style="" data-originalwidth="110.383">
+        {% if user.is_authenticated %}
+          <li class="{% if request.path == my_courses %}ipsNavBar_activate{% else %}ipsNavBar{% endif %}">
+            <a href="{% url 'academy.my_courses' %}" data-navdefault="" id="ips_uid_6538_5">
+              <i class="fa fa-graduation-cap"></i> 
+              {% trans "My Courses" %}
+            </a>
+
+          </li>
+        {% endif %}
+
+        <li class="{% if request.path == questions %}ipsNavBar_activate {% else %}ipsNavBar{% endif %}">
           <a href="{% url 'questions' %}" data-navitem-id="9">
             {% trans 'Q & A' %}
-            <span class="ipsNavBar_active__identifier"></span>
           </a>
-
-          <ul class="ipsNavBar_secondary ipsHide" data-role="secondaryNavBar">
-            <li id="elNavSecondary" data-role="navBarItem" data-navapp="core" data-navext="CustomItem">
-              <a href="#" data-navitem-id="27">
-                TagExample
-                <span class="ipsNavBar_active__identifier"></span>
-              </a>
-            </li>
-          </ul>
         </li>
 
-        <li id="elNavSecondary_10" data-role="navBarItem" data-navapp="downloads" data-navext="Downloads" style="" data-originalwidth="59.25">
+        <li class="{% if request.path == books %}ipsNavBar_activate{% else %}ipsNavBar{% endif %}">
           <a href="{% url 'books' %}" data-navitem-id="10">
             {% trans 'Books' %}
-            <span class="ipsNavBar_active__identifier"></span>
           </a>
 
-          <ul class="ipsNavBar_secondary ipsHide" data-role="secondaryNavBar">
-            <li id="elNavSecondary_82" data-role="navBarItem" data-navapp="core" data-navext="CustomItem">
-              <a href="#" data-navitem-id="82">
-                TagExample
-                <span class="ipsNavBar_active__identifier"></span>
-              </a>
-            </li>
-          </ul>
         </li>
 
-        <li id="elNavSecondary_46" data-role="navBarItem" data-navapp="nexus" data-navext="Store" style="" data-originalwidth="68.0078">
+        <li class="{% if request.path == store %}ipsNavBar_activate{% else %}ipsNavBar{% endif %}">
           <a href="{% url 'store' %}" data-navitem-id="46">
             {% trans 'Courses' %}
-            <span class="ipsNavBar_active__identifier"></span>
           </a>
 
-          <ul class="ipsNavBar_secondary ipsHide" data-role="secondaryNavBar">
-            <li id="elNavSecondary_73" data-role="navBarItem" data-navapp="core" data-navext="CustomItem">
-              <a href="{% url 'store' %}" data-navitem-id="73">
-                {% trans 'Courses' %}
-                <span class="ipsNavBar_active__identifier"></span>
-              </a>
-            </li>
-          </ul>
         </li>
 
         <li class="ipsHide" id="elNavigationMore" data-role="navMore" style="">
-          <a href="#" data-ipsmenu="" data-ipsmenu-appendto="#elNavigationMore" id="elNavigationMore_dropdown">{% trans 'More' %}</a>
-          <ul class="ipsNavBar_secondary ipsHide" data-role="secondaryNavBar">
-            <li class="ipsHide" id="elNavigationMore_more" data-role="navMore">
-              <a href="#" data-ipsmenu="" data-ipsmenu-appendto="#elNavigationMore_more" id="elNavigationMore_more_dropdown">
-                {% trans 'More' %}
-                <i class="fa fa-caret-down"></i>
-              </a>
-              <ul class="ipsHide ipsMenu ipsMenu_auto" id="elNavigationMore_more_dropdown_menu" data-role="moreDropdown"></ul>
-            </li>
-          </ul>
+          <a href="#" data-ipsmenu="" data-ipsmenu-appendto="#elNavigationMore" id="elNavigationMore_dropdown">{% trans
+            'More' %}</a>
         </li>
       </ul>
 
-      <div id="elSearchWrapper">
-        <div id="elSearch" data-controller="core.front.core.quickSearch">
-          <form accept-charset="utf-8" action="//academy.hsoub.com/search/?do=quicksearch" method="post">
-            <input type="search" id="elSearchField" placeholder="{% trans 'Search...' %}" name="q" autocomplete="off" aria-label="{% trans 'Search' %}" />
-            <button class="cSearchSubmit" type="submit" aria-label="{% trans 'Search' %}"><i class="fa fa-search"></i></button>
-          </form>
-        </div>
-      </div>
     </div>
   </nav>
 
@@ -173,10 +134,12 @@
       <div class="ipsPadding ipsBorder_bottom">
         <ul class="ipsToolList ipsToolList_vertical">
           <li>
-            <a href="{% url 'login' %}" id="elSigninButton_mobile" class="ipsButton ipsButton_light ipsButton_small ipsButton_fullWidth">{% trans 'Login' %}</a>
+            <a href="{% url 'login' %}" id="elSigninButton_mobile"
+              class="ipsButton ipsButton_light ipsButton_small ipsButton_fullWidth">{% trans 'Login' %}</a>
           </li>
           <li>
-            <a href="{% url 'register' %}" target="_blank" rel="noopener" class="ipsButton ipsButton_small ipsButton_fullWidth ipsButton_important">{% trans 'Register' %}</a>
+            <a href="{% url 'register' %}" target="_blank" rel="noopener"
+              class="ipsButton ipsButton_small ipsButton_fullWidth ipsButton_important">{% trans 'Register' %}</a>
           </li>
         </ul>
       </div>
@@ -203,15 +166,18 @@
                   <a href="http://twitter.com/HsoubAcademy" target="_blank" rel="noopener">{% trans 'Twitter' %}</a>
                 </li>
                 <li>
-                  <a href="http://www.facebook.com/HsoubAcademy" target="_blank" rel="noopener">{% trans 'Facebook' %}</a>
+                  <a href="http://www.facebook.com/HsoubAcademy" target="_blank" rel="noopener">{% trans 'Facebook'
+                    %}</a>
                 </li>
                 <li>
-                  <a href="https://www.youtube.com/channel/UCJv37tcBvJlBF2MoVMRMvbQ" target="_blank" rel="noopener">{% trans 'Youtube' %}</a>
+                  <a href="https://www.youtube.com/channel/UCJv37tcBvJlBF2MoVMRMvbQ" target="_blank" rel="noopener">{%
+                    trans 'Youtube' %}</a>
                 </li>
               </ul>
             </li>
             <li>
-              <a href="#" target="_blank" rel="noopener">{% trans 'Wikki Hsoub' %} <i class="fa fa-external-link"></i></a>
+              <a href="#" target="_blank" rel="noopener">{% trans 'Wikki Hsoub' %} <i
+                  class="fa fa-external-link"></i></a>
             </li>
           </ul>
         </li>

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponse
 from django.utils.translation import gettext as _
 from django.views.decorators.csrf import csrf_exempt
 from hsoub import settings
@@ -7,46 +7,18 @@ from academy.models import Course, Cart, Course, Order
 from account.models import User
 from checkout.models import Transaction, PaymentMethod
 from checkout.forms import UserInfoForm
+from django.contrib.auth.decorators import login_required
 import math, stripe
 
 
-# def make_order(request):
-#   if request.method != "POST":
-#     return redirect("academy.checkout")
-  
-#   elif request.method == "POST":
-#     print("========= Hiiiii")
-#     cart = Cart.objects.filter(session=request.session.session_key)
-#     courses = Course.objects.filter(pk__in=cart.items)
-
-#     total = 0
-
-#     for item in courses:
-#       total += item.price
-
-#     if total <= 0:
-#       return redirect("academy.store.cart")
-    
-#     user = request.user
-#     order = Order.objects.create(customer=user, total=total)
-#     print(order, "======== order")
-
-#     for course in courses:
-#       order.ordercourse_set.create(course_id=course.id, price=course.price)
-#       print(course.title, "================== course")
-#       print(order.ordercourse_set.price, "============== order course price",)
-
-#     cart.delete()
-#     return redirect("home")
-
-
-
+@login_required(login_url="/account/login")
 def stripe_config(request):
     return JsonResponse({
         'public_key': settings.STRIPE_PUBLISHABLE_KEY
     })
 
 
+@login_required(login_url="/account/login")
 @csrf_exempt
 def stripe_transaction(request):
     transaction = make_transaction(request, PaymentMethod.Stripe)
@@ -68,26 +40,7 @@ def stripe_transaction(request):
     })
 
 
-# def paypal_transaction(request):
-#     transaction = make_transaction(request, PaymentMethod.Paypal)
-#     if not transaction:
-#         return JsonResponse({
-#             'message': _('Please enter valid information.')
-#         }, status=400)
-
-#     form = MyPayPalPaymentsForm(initial={
-#         'business': settings.PAYPAL_EMAIL,
-#         'amount': transaction.amount,
-#         'invoice': transaction.id,
-#         'currency_code': settings.CURRENCY,
-#         'return_url': f'http://{request.get_host()}{reverse("store.checkout_complete")}',
-#         'cancel_url': f'http://{request.get_host()}{reverse("store.checkout")}',
-#         'notify_url': f'http://{request.get_host()}{reverse("checkout.paypal-webhook")}',
-#     })
-
-#     return HttpResponse(form.render())
-
-
+@login_required(login_url="/account/login")
 @csrf_exempt
 def make_transaction(request, pm):
 

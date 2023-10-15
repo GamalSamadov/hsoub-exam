@@ -14,4 +14,8 @@ urlpatterns = [
     path("store/cart/remove/<int:cid>/", cart_remove, name="academy.store.cart.remove"),
     path("checkout/", checkout, name="academy.checkout"),
     path("checkout/complete/", checkout_complate, name="academy.checkout.complate"),
+    path("my_courses/", my_courses, name="academy.my_courses"),
+    path("my_courses/<int:cid>/", subtitles, name="academy.subtitles"),
+    path("my_courses/<int:cid>/subtitle/<int:sid>", videos, name="academy.videos"),
+    path("my_courses/<int:cid>/subtitle/<int:sid>/video/<int:vid>/", video, name="academy.video"),
 ]

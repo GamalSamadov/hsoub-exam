@@ -32,6 +32,7 @@ class CourseVideo(models.Model):
     return f'courses/{self.subtitle.course.title}/{self.subtitle.subtitle}/{self.title}/{filename}'
   
   title = models.CharField(max_length=255)
+  description = models.CharField(max_length=255, null=True)
   subtitle = models.ForeignKey(CourseSubTitle, on_delete=models.CASCADE)
   video = models.FileField(upload_to=upload_file_name)
   created_at = models.DateTimeField(auto_now_add=True, null=True)
@@ -58,11 +59,12 @@ class OrderCourse(models.Model):
   order = models.ForeignKey(Order, on_delete=models.PROTECT, null=True)
   course = models.ForeignKey(Course, on_delete=models.PROTECT, null=True)
   price = models.FloatField(null=True)
+  approved = models.BooleanField(default=False)
   created_at = models.DateTimeField(auto_now_add=True, null=True)
   updated_at = models.DateTimeField(auto_now=True, null=True)
 
   def __str__(self):
-    return self.id
+    return str(self.id)
   
 
 class Cart(models.Model):

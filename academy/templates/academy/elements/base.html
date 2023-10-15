@@ -11,39 +11,39 @@
       {% endblock %}
     </title>
     <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-D6HLCHN9ES"></script>
-    <script>
-      window.dataLayer = window.dataLayer || []
-      function gtag() {
-        dataLayer.push(arguments)
-      }
-      gtag('js', new Date())
-      
-      gtag('config', 'G-D6HLCHN9ES')
-    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet" />
 
-    <link rel="stylesheet" href="{% static 'assets/css/framework.css' %}" media="all" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}" media="all" />
-    <link rel="stylesheet" href="{% static 'assets/css/flags.css' %}" media="all" />
+    <link rel="stylesheet" href="{% static 'assets/css/framework.css' %}" media="all">
 
-    <link rel="stylesheet" href="{% static 'assets/css/bundle.css' %}" media="all" />
+    <link rel="stylesheet" href="{% static 'assets/css/responsive.css' %}" media="all">
+    <link rel="stylesheet" href="{% static 'assets/css/flags.css' %}" media="all">
 
-    <link rel="stylesheet" href="{% static 'assets/css/all.min.css' %}" />
-    <script src="{% static 'assets/js/all.min.js' %}"></script>
 
-    <link rel="stylesheet" href="{% static 'assets/css/main_custom.css' %}" media="all" />
+    <link rel="stylesheet" href="{% static 'assets/css/bundle.css' %}" media="all">
 
-    <link rel="shortcut icon" href="{% static 'assets/images/logos/icon.ico' %}" type="image/x-icon" />
+    <link rel="stylesheet" href="{% static 'assets/css/all.min.css' %}">
+    <script src="{% static "assets/js/all.min.js" %}"></script>
+
+    <link rel="stylesheet" href="{% static 'assets/css/main_custom.css' %}" media="all">
+    
+    <link rel="shortcut icon" href="{% static 'assets/images/logos/icon.ico' %}" type="image/x-icon">
+
 
     <link rel="stylesheet" type="text/css" href="{% static 'toastify/css/toastify.min.css' %}" />
     <script type="text/javascript" src="{% static 'toastify/js/toastify.js' %}"></script>
 
     <script src="https://js.stripe.com/v3"></script>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
 
     {% block custom_head %}
     {% endblock custom_head %}
@@ -112,55 +112,25 @@
     {% include 'academy/elements/footer.html' %}
 
     <script type="text/javascript">
-      var ipsDebug = false
-      
-      var CKEDITOR_BASEPATH = '//academy.hsoub.com/applications/core/interface/ckeditor/ckeditor/'
-      
+      var ipsDebug = false;		
+    
+      var CKEDITOR_BASEPATH = '';
+    
       var ipsSettings = {
-        cookie_path: '/',
+        
       
-        cookie_prefix: 'k',
+      };
+    
       
-        cookie_ssl: true,
-      
-        essential_cookies: ['oauth_authorize', 'member_id', 'login_key', 'clearAutosave', 'lastSearch', 'device_key', 'IPSSessionFront', 'loggedIn', 'noCache', 'hasJS', 'cookie_consent', 'cookie_consent_optional', 'language', 'forumpass_*', 'cm_reg', 'location', 'currency', 'guestTransactionKey'],
-        upload_imgURL: '',
-        message_imgURL: '',
-        notification_imgURL: '',
-        csrfKey: '61bf4f871d4b9de35c437e5ae01f46d0',
-        antiCache: '29b3b443b81695803921',
-        jsAntiCache: '29b3b443b81696102407',
-        disableNotificationSounds: true,
-        useCompiledFiles: true,
-        links_external: true,
-        memberID: 0,
-        lazyLoadEnabled: false,
-        googleAnalyticsEnabled: true,
-        matomoEnabled: false,
-        viewProfiles: true,
-        mapProvider: 'none',
-        mapApiKey: '',
-        pushPublicKey: 'BCLuVDJ0V4gpkFR02QFyfGGI8BUtc5M2I_nUVWAhuuVTIcGq8N6-ODWLMHyxRRqKprKwOdu5gTpnu4p_wk0ES-0',
-        relativeDates: true
-      }
-      
-      ipsSettings['maxImageDimensions'] = {
-        width: 900,
-        height: 600
-      }
     </script>
-
-
-    <script type="text/javascript" src="{% static 'assets/js/bootstrap.js' %}" data-ips=""></script>
+    
 
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script>
-    
     <script src="{% static 'assets/js/main.js' %}"></script>
 
     <script src="{% static 'assets/js/stripe.js' %}"></script>
+   
     
     {% block custom_script %}
     {% endblock custom_script %}

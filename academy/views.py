@@ -2,7 +2,10 @@ from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.utils.translation import gettext as _
 from account.models import User
-from academy.models import Course, CourseSubTitle, Cart
+from academy.models import Course, CourseSubTitle, Cart, Order, CourseVideo
+from checkout.models import Transaction
+from django.contrib.auth.decorators import login_required
+
 
 
 def index(request):
@@ -68,6 +71,7 @@ def store_course_details(request, id):
   return render(request, "academy/store_course_details.html", context)
 
 
+@login_required(login_url="/account/login")
 def cart(request):
 
   context = {
@@ -77,6 +81,7 @@ def cart(request):
   return render(request, "academy/cart.html", context)
 
 
+@login_required(login_url="/account/login")
 def cart_update(request, cid):
 
   if not request.session.session_key:
@@ -85,6 +90,7 @@ def cart_update(request, cid):
   session_id = request.session.session_key
 
   cart_model = Cart.objects.filter(session=session_id).last()
+
 
   if cart_model is None:
     cart_model = Cart.objects.create(session_id=session_id, items=[cid])
@@ -99,6 +105,7 @@ def cart_update(request, cid):
   })
 
 
+@login_required(login_url="/account/login")
 def cart_remove(request, cid):
 
   session_id = request.session.session_key
@@ -121,6 +128,7 @@ def cart_remove(request, cid):
   })
 
 
+@login_required(login_url="/account/login")
 def checkout(request):
 
   context = {
@@ -130,8 +138,84 @@ def checkout(request):
   return render(request, "academy/checkout.html", context)
 
 
+@login_required(login_url="/account/login")
 def checkout_complate(request):
   Cart.objects.filter(session=request.session.session_key).delete()
   return render(request, "academy/index.html")
 
 
+@login_required(login_url="/account/login")
+def my_courses(request):
+
+  user = request.user
+
+  orders = Order.objects.filter(transaction__customer__id=user.id)
+
+  courses = []
+  for order in orders:
+    for order_course in order.ordercourse_set.filter(approved=True):
+      courses.append(order_course.course)
+  
+  count_videos = 0
+
+  for course in courses:
+    for subtitle in course.coursesubtitle_set.all():
+      count_videos += subtitle.coursevideo_set.all().count()
+  context = {
+    "courses": courses,
+    "count_videos": count_videos,
+  }
+
+  return render(request, "academy/my_courses.html", context)
+
+
+@login_required(login_url="/account/login")
+def subtitles(request, cid):
+
+  course = Course.objects.get(id=cid)
+
+  subtitles = CourseSubTitle.objects.filter(course__id=cid)
+
+  context = {
+    "course": course,
+    "subtitles": subtitles,
+
+  }
+
+  return render(request, "academy/subtitles.html", context)
+
+
+@login_required(login_url="/account/login")
+def videos(request, cid, sid):
+
+  course = Course.objects.get(id=cid)
+
+  subtitle = CourseSubTitle.objects.get(id=sid)
+
+  videos = CourseVideo.objects.filter(subtitle__id=sid)
+
+  context = {
+    "course": course,
+    "subtitle": subtitle,
+    "videos": videos,
+  }
+
+  return render(request, "academy/videos.html", context)
+
+
+@login_required(login_url="/account/login")
+def video(request, cid, sid, vid):
+
+  course = Course.objects.get(id=cid)
+
+  subtitle = CourseSubTitle.objects.get(id=sid)
+
+  video = CourseVideo.objects.get(id=vid)
+
+  context = {
+    "course": course,
+    "subtitle": subtitle,
+    "video": video,
+  }
+
+  return render(request, "academy/video.html", context)

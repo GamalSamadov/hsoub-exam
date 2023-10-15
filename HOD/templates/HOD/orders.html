@@ -1,0 +1,50 @@
+{% extends "HOD/elements/base.html" %}
+
+{% load static %}
+
+{% block title %}
+  Admin - Members
+{% endblock title %}
+
+{% block content %}
+
+  <p>
+    <a href="{% url "hod.orders" %}">Members</a> / 
+  </p>
+
+  <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">All </span> Orders</h4>
+  
+  <div class="card">
+    <div class="table-responsive text-nowrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Course Title</th>
+            <th>Member Full Name</th>
+            <th>Aprove</th>
+          </tr>
+        </thead>
+        <tbody class="table-border-bottom-0">
+          {% for order in orders %}
+          
+            <tr>
+              <td>{{ order.course.title }}</td>
+              <td>{{ order.order.transaction.customer.first_name }} {{ order.order.transaction.customer.last_name }}</td>
+              <td>
+                {% if order.approved %}
+                    <span class="badge bg-label-info me-1">Approved</span>
+                {% else %}
+                  <a href="{% url 'hod.order.approve' order.id %}">
+                    <span class="badge bg-label-success me-1">Click to Approve</span>
+                  </a>
+                {% endif %}
+              </td>
+            </tr>
+          
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+{% endblock content %}
