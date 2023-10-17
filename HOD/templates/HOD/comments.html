@@ -1,0 +1,49 @@
+{% extends "HOD/elements/base.html" %}
+
+{% load static %}
+
+{% block title %}
+  Admin - Comments
+{% endblock title %}
+
+{% block content %}
+
+  <p>
+    <a href="{% url "hod.comments" %}">Comments</a> / 
+  </p>
+
+  <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">All </span> Comments</h4>
+  
+  <div class="card">
+    <div class="table-responsive text-nowrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Comment Body</th>
+            <th>Video Title</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody class="table-border-bottom-0">
+          {% for comment in comments %}
+          
+            <tr>
+              <td>{{ comment.text }}</td>
+              <td>{{ comment.video.title }}</td>
+              <td>
+                <a href="{% url 'hod.answer' comment.id %}">
+                  <span class="badge bg-label-success me-1">Click to answer</span>
+                </a>
+                <a href="{% url 'hod.delete_comment' comment.id %}">
+                  <span class="badge bg-label-danger me-1">Delete</span>
+                </a>
+              </td>
+            </tr>
+          
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+{% endblock content %}

@@ -40,4 +40,9 @@ urlpatterns = [
     path("orders/", orders, name="hod.orders"),
     path("orders/approve/<int:oid>", approve_order, name="hod.order.approve"),
 
+    path("comments/", comments, name="hod.comments"),
+    path("comments/<int:comId>/", answer, name="hod.answer"),
+    path("comments/<int:comId>/delete/", delete_comment, name="hod.delete_comment"),
+    path("comments/<int:comId>/answer/<int:ansId>/delete/", delete_answer, name="hod.delete_answer"),
+
 ]

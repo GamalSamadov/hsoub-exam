@@ -29,12 +29,15 @@ class LoginCheckMiddleWare(MiddlewareMixin):
                     return redirect("staff_home")
             
             elif user.user_type == "3":
-                if modulename == "academy.views":
+                if modulename == "academy.views" and not user.member.banned:
                     pass
                 elif modulename == "account.views" or modulename == "django.views.static" or modulename == "checkout.views" or modulename == "checkout.webhooks":
                     pass
                 else:
-                    return redirect("home")
+                    if user.member.banned:
+                        return redirect("banned")
+                    else:
+                        return redirect("home")
 
             else:
                 return redirect("login")

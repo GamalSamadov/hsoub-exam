@@ -30,6 +30,9 @@ def user_login(request):
                 return redirect('staff_home')
 
             elif user_type == '3':
+                if user.member.banned:
+                    messages.error(request, 'You are banned')
+                    return redirect("banned")
                 messages.success(request, 'Welcome back')
                 return redirect('home')
             else:
@@ -66,6 +69,10 @@ def register(request):
         except:
             messages.error(request, 'Failed to register')
             return redirect('home')
+
+
+def banned(request):
+    return render(request, "account/banned.html")
 
 
 def user_logout(request):

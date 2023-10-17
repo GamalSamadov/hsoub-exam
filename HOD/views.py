@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 from account.models import Staff, Member, User
-from academy.models import Course, CourseSubTitle, CourseVideo, OrderCourse
+from academy.models import Course, CourseSubTitle, CourseVideo, OrderCourse, Comment, Answer
 
 
 # Home
@@ -720,4 +720,71 @@ def approve_order(request, oid):
     messages.error(request, "There was error while approving the order!")
     return redirect("hod.orders")
 
+
+def comments(request):
+
+  comments = Comment.objects.all()
+
+  context = {
+    "comments": comments,
+  }
+
+  return render(request, "HOD/comments.html", context)
+
+
+def delete_comment(request, comId):
+  comment = Comment.objects.get(id=comId)
+
+  try:
+    comment.delete()
+    messages.success(request, "Comment was deleted successfully!")
+    return redirect("hod.comments")
+  except:
+    messages.error(request, "There was an error while deleting this comment!")
+    return redirect("hod.comments")
+
+
+@csrf_exempt
+def answer(request, comId):
+
+  if request.method == 'GET':
+    comment = Comment.objects.get(id=comId)
+
+    answers = Answer.objects.filter(comment=comment)
+
+    context = {
+      "comment": comment,
+      "answers": answers,
+    }
+
+    return render(request, "HOD/answer.html", context)
+  elif request.method == "POST":
+    sender = request.user
+    comment = Comment.objects.get(id=comId)
+
+    text = request.POST.get("text")
+
+    try:
+      Answer.objects.create(
+        sender=sender,
+        comment=comment,
+        text=text,
+      )
+      messages.success(request, "Your answer was sended successfully!")
+      return redirect("hod.answer", comId=comId)
+    except:
+      messages.error(request, "There was an error while sending your answer!")
+      return redirect("hod.answer", comId=comId)
+
+
+def delete_answer(request, comId, ansId):
+  answer = Answer.objects.get(id=ansId)
+
+  try:
+    answer.delete()
+    messages.success(request, "Answer was deleted successfully!")
+    return redirect("hod.answer", comId=comId)
+  except:
+    messages.error(request, "There was an error while deleting this answer!")
+    return redirect("hod.answer", comId=comId)
 

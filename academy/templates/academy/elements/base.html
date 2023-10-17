@@ -63,7 +63,7 @@
 
     <main id="ipsLayout_body" class="ipsLayout_container">
       <div id="ipsLayout_contentArea">
-        <div id="ipsLayout_contentWrapper">
+        
           {% if messages %}
             {% for message in messages %}
               {% if message.tags == 'error' %}
@@ -105,7 +105,7 @@
           {% block content %}
 
           {% endblock %}
-        </div>
+
       </div>
     </main>
 

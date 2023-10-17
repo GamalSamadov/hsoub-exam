@@ -5,6 +5,7 @@
 {% url "members" as members %}
 {% url "courses" as courses %}
 {% url "hod.orders" as orders %}
+{% url "hod.comments" as comments %}
 
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
   <div class="app-brand demo">
@@ -54,7 +55,6 @@
       </ul>
     </li>
 
-    <!-- Dashboard -->
     <li class="menu-item {% if request.path == courses %}active{% endif %}">
       <a href="{% url "courses" %}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-detail"></i>
@@ -62,11 +62,17 @@
       </a>
     </li>
 
-    <!-- Dashboard -->
     <li class="menu-item {% if request.path == orders %}active{% endif %}">
       <a href="{% url "hod.orders" %}" class="menu-link">
         <i class="menu-icon tf-icons bx bx-detail"></i>
         <div data-i18n="Analytics">Orders</div>
+      </a>
+    </li>
+
+    <li class="menu-item {% if request.path == comments %}active{% endif %}">
+      <a href="{% url "hod.comments" %}" class="menu-link">
+        <i class="menu-icon tf-icons bx bx-detail"></i>
+        <div data-i18n="Analytics">Comments</div>
       </a>
     </li>
 

@@ -18,4 +18,7 @@ urlpatterns = [
     path("my_courses/<int:cid>/", subtitles, name="academy.subtitles"),
     path("my_courses/<int:cid>/subtitle/<int:sid>", videos, name="academy.videos"),
     path("my_courses/<int:cid>/subtitle/<int:sid>/video/<int:vid>/", video, name="academy.video"),
+    path("my_courses/<int:cid>/subtitle/<int:sid>/video/<int:vid>/add_comment/", add_comment, name="academy.video.add_comment"),
+    path("my_courses/<int:cid>/subtitle/<int:sid>/video/<int:vid>/comment/<int:comId>/", answers, name="academy.video.answers"),
+    path("my_courses/<int:cid>/subtitle/<int:sid>/video/<int:vid>/comment/<int:comId>/add_answer/", add_answer, name="academy.video.add_answer"),
 ]

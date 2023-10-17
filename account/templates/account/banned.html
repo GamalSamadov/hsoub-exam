@@ -1,0 +1,23 @@
+{% extends "account/elements/base.html" %}
+
+{% load i18n %}
+
+{% block title %}
+  Hsoub - Oopps 
+{% endblock title %}
+
+{% block form %}
+
+  <h1>{% trans "Oopps" %}</h1>
+
+  <div class="row">
+    <h1>
+      {% trans "You'r account was banned by admin :(" %}
+    </h1>
+    <p>{% trans "You can create a new account to login" %} 
+      <a href="{% url 'register' %}">{% trans "Create a new account" %}</a>
+    </p>
+  </div>
+
+{% endblock form %}
+ 

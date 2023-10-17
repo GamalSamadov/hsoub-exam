@@ -8,82 +8,88 @@
 {% endblock %}
 
 {% block content %}
-    <nav class="ipsBreadcrumb ipsBreadcrumb_top ipsFaded_withHover">
-      <ul class="ipsList_inline ipsPos_right">
-        <li>
-          <a data-action="defaultStream" class="ipsType_light" href="#"><i class="fa fa-newspaper-o" aria-hidden="true"></i> <span>{% trans "Actions" %}</span></a>
-        </li>
-      </ul>
+<div id="ipsLayout_contentWrapper">
 
-      <ul data-role="breadcrumbList">
-        <li>
-          <a title="Home" href="{% url "home" %}"><span>{% trans "Home" %} <i class="fa fa-angle-right"></i></span></a>
-        </li>
+  <nav class="ipsBreadcrumb ipsBreadcrumb_top ipsFaded_withHover">
+    <ul class="ipsList_inline ipsPos_right">
+      <li>
+        <a data-action="defaultStream" class="ipsType_light" href="#"><i class="fa fa-newspaper-o" aria-hidden="true"></i> <span>{% trans "Actions" %}</span></a>
+      </li>
+    </ul>
 
-        <li>
-          <a href=""><span>{% trans "All courses" %}</span></a>
-        </li>
-      </ul>
-    </nav>
+    <ul data-role="breadcrumbList">
+      <li>
+        <a title="Home" href="{% url "home" %}"><span>{% trans "Home" %} <i class="fa fa-angle-right"></i></span></a>
+      </li>
 
-    <div id="ipsLayout_mainArea">
-      <header class="ipsPageHeader ipsBox ipsPadding ipsResponsive_pull ipsClearfix ipsSpacer_bottom">
-        <h1 class="ipsType_pageTitle ipsType_largeTitle">{% trans "Courses" %}</h1>
+      <li>
+        <a href=""><span>{% trans "All courses" %}</span></a>
+      </li>
+    </ul>
+  </nav>
 
-        <div class="ipsType_richText ipsType_normal" data-controller="core.front.core.lightboxedImages"></div>
-      </header>
+  <div id="ipsLayout_mainArea">
+    <header class="ipsPageHeader ipsBox ipsPadding ipsResponsive_pull ipsClearfix ipsSpacer_bottom">
+      <h1 class="ipsType_pageTitle ipsType_largeTitle">{% trans "Courses" %}</h1>
 
-      <div data-role="packageListContainer" id="ips_uid_8776_3">
-        <section class="ipsBox">
+      <div class="ipsType_richText ipsType_normal" data-controller="core.front.core.lightboxedImages"></div>
+    </header>
 
-          <div class="ipsPad">
-            <ol class="ipsGrid ipsGrid_collapsePhone cNexusCategory_grid" data-ipsgrid="" data-ipsgrid-minitemsize="170" data-ipsgrid-maxitemsize="230" data-ipsgrid-equalheights="row" data-role="packageList" style="height: auto;">
+    <div data-role="packageListContainer" id="ips_uid_8776_3">
+      <section class="ipsBox">
 
-              {% for course in courses %}
-              
-                <li class="cNexusProduct ipsPad_half ipsClearfix ipsGrid_span3" style="height: 272.438px;">
-                  <a href="{% url "academy.store.course.details" course.id %}" class="cNexusProduct_image">
-                    <img src="{{ course.pic.url }}" class="ipsImage" alt="{{ course.title }}" width="140" /></a>
-                  <div>
-                    <h2 class="cNexusProduct_title ipsType_normal ipsType_unbold ipsType_reset ipsType_blendLinks">
-                      <a href="{% url "academy.store.course.details" course.id %}" data-role="productLink" class="">
-                        {{ course.title }}
-                      </a>
-                    </h2>
-                    <div class="ipsType_reset ipsTruncate ipsTruncate_line">
-                      <div class="cNexusProduct__prices">
-                        <div>
-                          <span class="cNexusPrice">{{ course.price }} $</span>
-                          <span class="cNexusPrice_tax ipsType_light"></span>
-                        </div>
+        <div class="ipsPad">
+          <ol class="ipsGrid ipsGrid_collapsePhone cNexusCategory_grid" data-ipsgrid="" data-ipsgrid-minitemsize="170" data-ipsgrid-maxitemsize="230" data-ipsgrid-equalheights="row" data-role="packageList" style="height: auto;">
+
+            {% for course in courses %}
+            
+              <li class="cNexusProduct ipsPad_half ipsClearfix ipsGrid_span3" style="height: 272.438px;">
+                <a href="{% url "academy.store.course.details" course.id %}" class="cNexusProduct_image">
+                  <img src="{{ course.pic.url }}" class="ipsImage" alt="{{ course.title }}" width="140" /></a>
+                <div>
+                  <h2 class="cNexusProduct_title ipsType_normal ipsType_unbold ipsType_reset ipsType_blendLinks">
+                    <a href="{% url "academy.store.course.details" course.id %}" data-role="productLink" class="">
+                      {{ course.title }}
+                    </a>
+                  </h2>
+                  <div class="ipsType_reset ipsTruncate ipsTruncate_line">
+                    <div class="cNexusProduct__prices">
+                      <div>
+                        <span class="cNexusPrice">{{ course.price }} $</span>
+                        <span class="cNexusPrice_tax ipsType_light"></span>
                       </div>
                     </div>
                   </div>
-                </li>
-              
-              {% endfor %}
+                </div>
+              </li>
+            
+            {% endfor %}
 
-            </ol>
-          </div>
-        </section>
-      </div>
+          </ol>
+        </div>
+      </section>
     </div>
+  </div>
 
-    <nav class="ipsBreadcrumb ipsBreadcrumb_bottom ipsFaded_withHover">
-      <ul class="ipsList_inline ipsPos_right">
-        <li>
-          <a data-action="defaultStream" class="ipsType_light" href=""><i class="fa fa-newspaper-o" aria-hidden="true"></i> <span>{% trans "Actions" %}</span></a>
-        </li>
-      </ul>
+  <nav class="ipsBreadcrumb ipsBreadcrumb_bottom ipsFaded_withHover">
+    <ul class="ipsList_inline ipsPos_right">
+      <li>
+        <a data-action="defaultStream" class="ipsType_light" href=""><i class="fa fa-newspaper-o" aria-hidden="true"></i> <span>{% trans "Actions" %}</span></a>
+      </li>
+    </ul>
 
-      <ul data-role="breadcrumbList">
-        <li>
-          <a title="Home" href="{% url "home" %}"><span>{% trans "Home" %} <i class="fa fa-angle-right"></i></span></a>
-        </li>
+    <ul data-role="breadcrumbList">
+      <li>
+        <a title="Home" href="{% url "home" %}"><span>{% trans "Home" %} <i class="fa fa-angle-right"></i></span></a>
+      </li>
 
-        <li>
-          <a href="{% url "store" %}"><span>{% trans "Courses" %}</span></a>
-        </li>
-      </ul>
-    </nav>
+      <li>
+        <a href="{% url "store" %}"><span>{% trans "Courses" %}</span></a>
+      </li>
+    </ul>
+  </nav>
+</div>
+
+<div id="ipsLayout_sidebar" class="ipsLayout_sidebarright" data-controller="core.front.widgets.sidebar">
+</div>
 {% endblock %}

@@ -20,6 +20,7 @@ class Course(models.Model):
     self.pic.delete()
     super().delete()
 
+
 class CourseSubTitle(models.Model):
   subtitle = models.CharField(max_length=255)
   course = models.ForeignKey(Course, on_delete=models.CASCADE)
@@ -42,11 +43,24 @@ class CourseVideo(models.Model):
     self.video.delete()
     super().delete()
 
-class MemberCourses(models.Model):
-  member = models.ForeignKey(Member, on_delete=models.CASCADE)
-  course = models.ForeignKey(Course, on_delete=models.CASCADE)
+
+class Comment(models.Model):
+  video = models.ForeignKey(CourseVideo, on_delete=models.CASCADE, null=True)
+  sender = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+  text = models.CharField(max_length=1000, null=True)
   created_at = models.DateTimeField(auto_now_add=True, null=True)
-  updated_at = models.DateTimeField(auto_now=True, null=True)
+  updated_at = models.DateTimeField(auto_now=True, null=True)  
+
+
+  def count_of_answers(self):
+    return self.answer_set.all().count()
+
+class Answer(models.Model):
+  comment = models.ForeignKey(Comment, on_delete=models.CASCADE, null=True)
+  sender = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
+  text = models.CharField(max_length=1000, null=True)
+  created_at = models.DateTimeField(auto_now_add=True, null=True)
+  updated_at = models.DateTimeField(auto_now=True, null=True)  
 
 
 class Order(models.Model):
@@ -65,7 +79,7 @@ class OrderCourse(models.Model):
 
   def __str__(self):
     return str(self.id)
-  
+ 
 
 class Cart(models.Model):
   items = models.JSONField(default=dict)

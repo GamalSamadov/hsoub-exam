@@ -1,0 +1,69 @@
+{% extends "HOD/elements/base.html" %}
+
+{% load static %}
+
+{% block title %}
+  Admin - Answers
+{% endblock title %}
+
+{% block content %}
+
+  <p>
+    <a href="{% url "hod.comments" %}">Comments</a> / <a href="{% url 'hod.answer' comment.id %}">{{ comment.text }}</a>
+  </p>
+
+  <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Add </span> Answer</h4>
+  <div class="row">
+
+    <div class="col-md-6">
+      <div class="card mb-4">
+        <div class="card-body demo-vertical-spacing demo-only-element">
+          <form action="{% url "hod.answer" comment.id %}" method="POST" enctype="multipart/form-data"> 
+            {% csrf_token %}
+
+            <div class="input-group mb-3">
+              <span class="input-group-text">Text</span>
+              <textarea class="form-control" aria-label="text" placeholder="Text..." spellcheck="false" data-ms-editor="true" name="text" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">All </span> Answers</h4>
+
+  <p>Comment: {{ comment.text }}</p>
+  
+  <div class="card">
+    <div class="table-responsive text-nowrap">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Answer text</th>
+            <th>Sender's Full Name</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody class="table-border-bottom-0">
+          {% for answer in answers %}
+          
+            <tr>
+              <td>{{ answer.text }}</td>
+              <td>{{ answer.sender.first_name }} {{ answer.sender.last_name }}</td>
+              <td>
+                <a href="{% url 'hod.delete_answer' comment.id answer.id %}">
+                  <span class="badge bg-label-danger me-1">Delete</span>
+                </a>
+              </td>
+            </tr>
+          
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+{% endblock content %}

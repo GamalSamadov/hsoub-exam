@@ -28,7 +28,11 @@
           class="fa fa-angle-right"></i> </a>
     </li>
     <li>
-      <a href="{% url 'academy.video' course.id subtitle.id video.id %}"> <span> {{ video.title }} </span> </a>
+      <a href="{% url 'academy.video' course.id subtitle.id video.id %}"> <span> {{ video.title }} </span> <i
+        class="fa fa-angle-right"></i>  </a>
+    </li>
+    <li>
+      <a href="{% url 'academy.video' course.id subtitle.id video.id %}"> <span> {% trans "Answers of commet" %}: {{ comment.id }} </span> </a>
     </li>
   </ul>
 </nav>
@@ -36,60 +40,17 @@
 <div id="elCmsPageWrap" data-pageid="21">
   <div class="ipsPageHeader ipsBox ipsResponsive_pull ipsPadding ipsClearfix">
     <h1 class="ipsType_pageTitle ipsContained_container">
-      <div class="ipsType_break ipsContained">{{ video.title }}</div>
+      <div class="ipsType_break ipsContained">{% trans "Title" %}: {{ comment.text }}</div>
+      <p>{% trans "Sender:" %} {{ comment.sender.first_name }} {{ comment.sender.last_name }}</p>
     </h1>
   </div>
   <hr class="ipsHr">
 
-
-  <article class="ipsContained ipsSpacer_top ipsBox ipsResponsive_pull">
-    <div class="ipsClearfix ipsPadding ">
-
-      <section class="ipsType_richText ipsType_normal" data-controller="core.front.core.lightboxedImages">
-        <div class="ipsEmbeddedVideo" contenteditable="false">
-          <div>
-            <video width="100%" height="100%" controls>
-              <source src="{{ video.video.url }}" type="video/mp4">
-              <source src="{{ video.video.url }}" type="video/ogg">
-              Your browser does not support the video tag.
-            </video>
-          </div>
-        </div>
-
-        {% if video.description %}
-        <p style="text-align: center;">
-          {{ video.description }}
-        </p>
-        {% endif %}
-      </section>
-
-
-
-    </div>
-
-  </article>
-
-  <br>
-
   <a id="replies"></a>
-  <h2 class="ipsType_sectionTitle ipsType_reset">{% trans "Students Comment" %}</h2>
+  <h2 class="ipsType_sectionTitle ipsType_reset">{% trans "All Answers" %}</h2>
+  
 
   <div data-controller="core.front.core.commentsWrapper" data-tabsid="bb0ece718da169f6936edf29d0dbea33">
-
-    <div class="ipsTabs ipsClearfix" id="elTabs_bb0ece718da169f6936edf29d0dbea33" data-ipstabbar=""
-      data-ipstabbar-contentarea="#ipsTabs_content_bb0ece718da169f6936edf29d0dbea33">
-      <a href="#elTabs_bb0ece718da169f6936edf29d0dbea33"></a>
-      <ul role="tablist">
-
-        <li>
-          <a href="#" id="bb0ece718da169f6936edf29d0dbea33_tab_comments" class="ipsTabs_item ipsTabs_activeItem"
-            title="0 تعليقات" role="tab" aria-selected="true">
-            0 {% trans "Comments" %}
-          </a>
-        </li>
-
-      </ul>
-    </div>
     <section id="ipsTabs_content_bb0ece718da169f6936edf29d0dbea33" class="ipsTabs_panels ipsTabs_contained">
       <div id="ipsTabs_elTabs_bb0ece718da169f6936edf29d0dbea33_bb0ece718da169f6936edf29d0dbea33_tab_comments_panel"
         class="ipsTabs_panel" aria-labelledby="bb0ece718da169f6936edf29d0dbea33_tab_comments" aria-hidden="false"
@@ -99,7 +60,7 @@
 
           <div data-role="commentFeed" data-controller="core.front.core.moderation">
 
-            {% for comment in comments %}
+            {% for answer in answers %}
 
               <article id="elComment_80163"
                 class="ipsBox ipsBox--child ipsComment ipsComment_parent ipsClearfix ipsClear">
@@ -108,21 +69,21 @@
                   <div class="ipsComment_header ipsFlex ipsFlex-ai:start ipsFlex-jc:between">
                     <div class="ipsPhotoPanel ipsPhotoPanel_mini ipsPhotoPanel_notPhone">
 
-                      {% if comment.sender.member.profile_pic %}
+                      {% if answer.sender.member.profile_pic %}
                       <img
-                        src="{{ comment.sender.member.profile_pic.url }}"
-                        alt="{{ comment.sender.username }}" width="50">
+                        src="{{ answer.sender.member.profile_pic.url }}"
+                        alt="{{ answer.sender.username }}" width="50">
                         {% else %}
                         <img
                           src="{% static "dashboard/img/icons/user/user_icon.png" %}"
-                          alt="{{ comment.sender.username }}" width="50">
+                          alt="{{ answer.sender.username }}" width="50">
                       {% endif %}
 
                       <div>
                         <h3 class="ipsComment_author ipsType_blendLinks">
                           <strong class="ipsType_normal">
                             <div class="ipsType_break">
-                              {{ comment.sender.first_name }} {{ comment.sender.last_name }}
+                              {{ answer.sender.first_name }} {{ answer.sender.last_name }}
                             </div>
                             </strong>
                         </h3>
@@ -130,7 +91,7 @@
                         <p class="ipsComment_meta ipsType_light ipsType_medium">
                           {% trans "Posted on:" %}
                           <time>
-                            {{ comment.created_at }}
+                            {{ answer.created_at }}
                           </time>
                         </p>
                       </div>
@@ -156,36 +117,14 @@
                   <div
                     class="ipsClear ipsPadding_vertical sm:ipsPadding_vertical:half ipsPadding_horizontal ipsType_normal ipsType_richText ipsContained" id="ips_uid_393_3">
                     <p>
-                      {{ comment.text }}
+                      {{ answer.text }}
                     </p>
                   </div>
-
-                  <div class="ipsItemControls">
-
-                    <ul class="ipsComment_controls ipsClearfix ipsItemControls_left" data-role="commentControls">
-
-                      <li data-ipsquote-editor="content_record_form_comment" data-ipsquote-target="#comment-80163"
-                      class="ipsJS_show">
-                      <a href="{% url 'academy.video.answers' course.id subtitle.id video.id comment.id %}" data-action="quoteComment" data-ipsquote-singlequote="">
-                        <button class="ipsButton ipsButton_light ipsButton_verySmall ipsButton_narrow cMultiQuote ipsHide"
-                          data-action="multiQuoteComment" data-ipstooltip="" data-ipsquote-multiquote=""
-                          data-mqid="mq80163" style="display: inline-block;"><i
-                            class="fa fa-plus"></i> {% trans "Replay" %} </button>
-                        </li>
-                      </a>
-                      <span>{{ comment.count_of_answers }} {% trans "Replays" %}</span>
-     
-                      <li class="ipsHide" data-role="commentLoading">
-                        <span class="ipsLoading ipsLoading_tiny ipsLoading_noAnim"></span>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
               </article>
 
             {% empty %}
               <p class="ipsType_normal ipsType_light ipsType_reset" data-role="noComments">
-                {% trans "There's no comments" %}
+                {% trans "There is no answers" %}
               </p>
             {% endfor %}
           </div>
@@ -205,14 +144,14 @@
               </div>
               <div class="ipsComposeArea_editor">
                 <div>
-                  <form action="{% url 'academy.video.add_comment' course.id subtitle.id video.id %}" method="POST" enctype="multipart/form-data">
+                  <form action="{% url 'academy.video.add_answer' course.id subtitle.id video.id comment.id %}" method="POST" enctype="multipart/form-data">
                     {% csrf_token %}
                     <textarea name="text" id="" cols="30" rows="10">
                     </textarea>
                     <br>
                     <br>
                     <button type="submit" class="ipsButton ipsButton_primary" tabindex="2" accesskey="s"
-                      role="button">Add to Comment</button>
+                      role="button">Add answer</button>
                   </form>
                 </div>
               </div>

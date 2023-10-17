@@ -1,10 +1,11 @@
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
 from django.utils.translation import gettext as _
-from account.models import User
-from academy.models import Course, CourseSubTitle, Cart, Order, CourseVideo
-from checkout.models import Transaction
+from academy.models import Course, CourseSubTitle, Cart, Order, CourseVideo, Comment, Answer
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
+from django.contrib import messages
+
 
 
 
@@ -156,14 +157,14 @@ def my_courses(request):
     for order_course in order.ordercourse_set.filter(approved=True):
       courses.append(order_course.course)
   
-  count_videos = 0
+  # count_videos = 0
 
-  for course in courses:
-    for subtitle in course.coursesubtitle_set.all():
-      count_videos += subtitle.coursevideo_set.all().count()
+  # for course in courses:
+  #   for subtitle in course.coursesubtitle_set.all():
+  #     count_videos += subtitle.coursevideo_set.all().count()
   context = {
     "courses": courses,
-    "count_videos": count_videos,
+    # "count_videos": count_videos,
   }
 
   return render(request, "academy/my_courses.html", context)
@@ -207,15 +208,76 @@ def videos(request, cid, sid):
 def video(request, cid, sid, vid):
 
   course = Course.objects.get(id=cid)
-
   subtitle = CourseSubTitle.objects.get(id=sid)
-
   video = CourseVideo.objects.get(id=vid)
+  comments = Comment.objects.filter(video=video)
 
   context = {
     "course": course,
     "subtitle": subtitle,
     "video": video,
+    "comments": comments,
   }
 
   return render(request, "academy/video.html", context)
+
+
+@csrf_exempt
+def add_comment(request, cid, sid, vid):
+
+  if request.method == "POST":
+    user = request.user
+    video = CourseVideo.objects.get(id=vid)
+    text = request.POST.get("text")
+
+    try:
+      Comment.objects.create(
+        sender=user,
+        video=video,
+        text=text,
+      )
+      messages.success(request, "Comment added! Will be approved soon!")
+      return redirect("academy.video", cid=cid, sid=sid, vid=vid)
+    except:
+      messages.error(request, "There was an error while adding your comment!")
+      return redirect("academy.video", cid=cid, sid=sid, vid=vid)
+
+
+def answers(request, cid, sid, vid, comId):
+  course = Course.objects.get(id=cid)
+  subtitle = CourseSubTitle.objects.get(id=sid)
+  video = CourseVideo.objects.get(id=vid)
+  comment = Comment.objects.get(id=comId)
+  answers = Answer.objects.filter(comment=comment)
+
+  context = {
+    "course": course,
+    "subtitle": subtitle,
+    "video": video,
+    "comment": comment,
+    "answers": answers,
+  }
+
+  return render(request, "academy/answers.html", context) 
+
+
+@csrf_exempt
+def add_answer(request, cid, sid, vid, comId):
+
+  if request.method == "POST":
+    user = request.user
+    comment = Comment.objects.get(id=comId)
+
+    text = request.POST.get("text")
+    try:
+      Answer.objects.create(
+        comment=comment,
+        sender=user,
+        text=text,
+      )
+      messages.success(request, "Your answer added successfully!")
+      return redirect("academy.video.answers", cid=cid, sid=sid, vid=vid, comId=comId)
+    except:
+      messages.error(request, "There was an error while adding your answer!")
+      return redirect("academy.video.answers", cid=cid, sid=sid, vid=vid, comId=comId)
+
