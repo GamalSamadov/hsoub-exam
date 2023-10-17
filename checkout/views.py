@@ -1,12 +1,10 @@
-from django.shortcuts import render, redirect
-from django.http import JsonResponse, HttpResponse
+from django.http import JsonResponse
 from django.utils.translation import gettext as _
 from django.views.decorators.csrf import csrf_exempt
 from hsoub import settings
-from academy.models import Course, Cart, Course, Order
+from academy.models import Course, Cart, Course
 from account.models import User
 from checkout.models import Transaction, PaymentMethod
-from checkout.forms import UserInfoForm
 from django.contrib.auth.decorators import login_required
 import math, stripe
 
@@ -63,3 +61,4 @@ def make_transaction(request, pm):
         items=cart.items,
         amount=math.ceil(total)
     )
+

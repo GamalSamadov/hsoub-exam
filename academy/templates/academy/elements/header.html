@@ -21,6 +21,28 @@
         <li class="cUserNav_icon ipsHide" id="elCart_container"></li>
         <li class="elUserNav_sep ipsHide" id="elCart_sep"></li>
 
+
+        <li id="cUserLink">
+         
+          <form action="{% url 'set_language' %}" method="post">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.get_full_path|slice:'1:' }}" />
+              {% get_current_language as LANGUAGE_CODE %}
+              {% get_available_languages as LANGUAGES %}
+              {% get_language_info_list for LANGUAGES as languages %}
+              {% for language in languages %}
+                  <span>
+                      <a href="/{{ language.code }}{{ request.get_full_path|slice:'3:' }}"
+                         class="{% if language.code == LANGUAGE_CODE %}selected{% endif %}"
+                         lang="{{ language.code }}">
+                          {{ language.name_local }}
+                      </a>
+                  </span>
+              {% endfor %}
+            </form>
+        </li>
+
+
         <li class="cUserNav_icon" id="elCart_container">
           <a href="{% url "academy.store.cart" %}" id="elCart">
             <i class="fa fa-shopping-cart"></i> 
@@ -29,9 +51,9 @@
             </span>
             &nbsp; {% trans "Cart" %}
           </a>
-
         </li>
 
+       
         <li id="cUserLink">
 
           <a href="#">{{ user.first_name }} {{ user.last_name }}
@@ -53,6 +75,27 @@
       <ul id="elUserNav" class="ipsList_inline cSignedOut ipsResponsive_showDesktop">
         <li class="cUserNav_icon ipsHide" id="elCart_container"></li>
         <li class="elUserNav_sep ipsHide" id="elCart_sep"></li>
+
+        <li id="cUserLink">
+         
+          <form action="{% url 'set_language' %}" method="post">
+            {% csrf_token %}
+            <input name="next" type="hidden" value="{{ request.get_full_path|slice:'1:' }}" />
+              {% get_current_language as LANGUAGE_CODE %}
+              {% get_available_languages as LANGUAGES %}
+              {% get_language_info_list for LANGUAGES as languages %}
+              {% for language in languages %}
+                  <span>
+                      <a href="/{{ language.code }}{{ request.get_full_path|slice:'3:' }}"
+                         class="{% if language.code == LANGUAGE_CODE %}selected{% endif %}"
+                         lang="{{ language.code }}">
+                          {{ language.name_local }}
+                      </a>
+                  </span>
+              {% endfor %}
+            </form>
+          </li>
+        
         <li id="elSignInLink">
           <a href="{% url 'login' %}">{% trans 'Login' %}</a>
         </li>
@@ -89,17 +132,6 @@
 
           </li>
         {% endif %}
-
-        <li class="{% if request.path == questions %}ipsNavBar_activate {% else %}ipsNavBar{% endif %}">
-          <a href="{% url 'questions' %}" data-navitem-id="9">
-            {% trans 'Q & A' %}
-          </a>
-        </li>
-
-        <li class="{% if request.path == books %}ipsNavBar_activate{% else %}ipsNavBar{% endif %}">
-          <a href="{% url 'books' %}" data-navitem-id="10">
-            {% trans 'Books' %}
-          </a>
 
         </li>
 

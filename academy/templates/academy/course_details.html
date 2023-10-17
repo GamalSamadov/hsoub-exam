@@ -1,7 +1,8 @@
 {% load static %}
 {% load i18n %}
+{% get_current_language as LANGUAGE_CODE %}
 <!DOCTYPE html>
-<html lang="ar" dir="lrt" style="--zaetoon-client-theme-color: #616571;">
+<html lang="{% if LANGUAGE_CODE == 'en' %}en{% elif LANGUAGE_CODE == 'ar' %}ar{% endif %}" dir="{% if LANGUAGE_CODE == 'en' %}lrt{% elif LANGUAGE_CODE == 'ar' %}rtl{% endif %}" style="--zaetoon-client-theme-color: #616571;">
 
 <head>
   <meta charset="UTF-8">

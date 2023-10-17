@@ -22,3 +22,4 @@ urlpatterns = [
     path("my_courses/<int:cid>/subtitle/<int:sid>/video/<int:vid>/comment/<int:comId>/", answers, name="academy.video.answers"),
     path("my_courses/<int:cid>/subtitle/<int:sid>/video/<int:vid>/comment/<int:comId>/add_answer/", add_answer, name="academy.video.add_answer"),
 ]
+

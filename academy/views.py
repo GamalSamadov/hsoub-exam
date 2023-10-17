@@ -281,3 +281,4 @@ def add_answer(request, cid, sid, vid, comId):
       messages.error(request, "There was an error while adding your answer!")
       return redirect("academy.video.answers", cid=cid, sid=sid, vid=vid, comId=comId)
 
+

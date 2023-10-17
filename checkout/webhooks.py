@@ -3,9 +3,7 @@ from hsoub.settings import STRIPE_ENDPOINT_SECRET
 from django.http import HttpResponse
 from checkout.models import Transaction
 from academy.models import Order, Course
-from django.contrib.auth.decorators import login_required
 import stripe
-
 
 
 @csrf_exempt
@@ -27,6 +25,7 @@ def stripe_webhook(request):
     payment_intent = event.data.object
     transaction_id = payment_intent.metadata.transaction
     make_order(transaction_id)
+    print(transaction_id)
 
   else:
     print('Unhandled event type {}'.format(event['type']))
