@@ -7,6 +7,6 @@ urlpatterns = [
     # path("order/", make_order, name="checkout.order"),
     path("stripe", stripe_transaction, name="checkout.stripe"),
     path("stripe/config/", stripe_config, name="checkout.stripe.config"),
-    path("stripe/webhook/", stripe_webhook),
+    path("stripe/webhook", stripe_webhook),
     # path("paypal/", paypal_transaction, name="checkout.paypal"),
 ]
