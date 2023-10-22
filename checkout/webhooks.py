@@ -7,27 +7,16 @@ from academy.models import Order, Course
 import stripe, json
 
 
-@require_POST
-@csrf_exempt
+# @require_POST
 def stripe_webhook(request):
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
     event = None
 
     try:
-        stripe.WebhookEndpoint.create(
-          url='https://hsoub-exam-production.up.railway.app/en/checkout/stripe/webhook',
-          enabled_events=[
-            'payment_intent.succeeded',
-          ],
-        )
         event = stripe.Webhook.construct_event(
             payload, sig_header, STRIPE_ENDPOINT_SECRET
         )
-
-        # event = stripe.Event.construct_from(
-        #     json.loads(payload), stripe.api_key
-        #   )
     except ValueError as e:
         print('Error parsing payload: {}'.format(str(e)))
         return HttpResponse(status=400)
