@@ -15,14 +15,14 @@ def stripe_webhook(request):
     event = None
 
     try:
-        # event = stripe.Webhook.construct_event(
-        #     payload, sig_header, STRIPE_ENDPOINT_SECRET
-        # )
-        event = stripe.WebhookEndpoint.create(
+        stripe.WebhookEndpoint.create(
           url='https://hsoub-exam-production.up.railway.app/en/checkout/stripe/webhook',
           enabled_events=[
             'payment_intent.succeeded',
           ],
+        )
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, STRIPE_ENDPOINT_SECRET
         )
 
         # event = stripe.Event.construct_from(
