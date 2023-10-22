@@ -8,6 +8,7 @@ import stripe, json
 
 
 # @require_POST
+@csrf_exempt
 def stripe_webhook(request):
     payload = request.body
     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
