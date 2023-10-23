@@ -671,7 +671,13 @@ def edit_course_video(request, courseId, subtitleId, videoId):
       course_video = CourseVideo.objects.get(id=videoId) 
       course_video.title = title
       course_video.description = description
-      course_video.video = video
+      if video:
+        course_video.video = video
+        if course_video.video:
+          course_video.video.delete()
+          course_video.video = video
+        else:
+          course_video.video = video
       
       course_video.save()
       messages.success(request, "Edited successfully!")
