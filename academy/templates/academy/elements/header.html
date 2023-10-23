@@ -47,7 +47,7 @@
           <a href="{% url "academy.store.cart" %}" id="elCart">
             <i class="fa fa-shopping-cart"></i> 
             <span class="ipsNotificationCount" id="cart-items-count">
-              {{ cart.courses|length }}
+              {{ cart.items|length }}
             </span>
             &nbsp; {% trans "Cart" %}
           </a>

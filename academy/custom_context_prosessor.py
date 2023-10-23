@@ -15,9 +15,10 @@ def academy_context(request):
 
     for item in cart_courses:
       cart_total += item.price
-
+  
   return {
     "user": user,
     "cart_courses": cart_courses,
+    "cart": cart,
     "cart_total": cart_total,
   }

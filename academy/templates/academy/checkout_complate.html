@@ -1,0 +1,22 @@
+{% extends 'academy/elements/base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}
+  {% trans 'Hsoub - Courses' %}
+{% endblock %}
+
+{% block content %}
+  <div id="ipsLayout_mainArea">
+    <div class="ipsBox_alt">
+      <div class="ipsType_center ipsPad">
+        <i class="ipsType_huge fa fa-shopping-cart"></i>
+        <h1 class="ipsType_reset ipsType_veryLarge ipsType_center">{% trans 'Checkout Complated' %}</h1>
+
+        <a href="{% url 'home' %}">{% trans "Go To Home Page" %}</a>
+      </div>
+
+    </div>
+  </div>
+{% endblock %}

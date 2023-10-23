@@ -7,8 +7,6 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib import messages
 
 
-
-
 def index(request):
   user = request.user
   courses = Course.objects.all() 
@@ -74,7 +72,6 @@ def store_course_details(request, id):
 
 @login_required(login_url="/account/login")
 def cart(request):
-
   context = {
 
   }
@@ -142,7 +139,7 @@ def checkout(request):
 @login_required(login_url="/account/login")
 def checkout_complate(request):
   Cart.objects.filter(session=request.session.session_key).delete()
-  return render(request, "academy/index.html")
+  return render(request, "academy/checkout_complate.html")
 
 
 @login_required(login_url="/account/login")
@@ -222,6 +219,7 @@ def video(request, cid, sid, vid):
   return render(request, "academy/video.html", context)
 
 
+@login_required(login_url="/account/login")
 @csrf_exempt
 def add_comment(request, cid, sid, vid):
 
@@ -229,20 +227,25 @@ def add_comment(request, cid, sid, vid):
     user = request.user
     video = CourseVideo.objects.get(id=vid)
     text = request.POST.get("text")
+    if text is not None:
+      try:
+        Comment.objects.create(
+          sender=user,
+          video=video,
+          text=text,
+        )
+        messages.success(request, "Comment added! Will be approved soon!")
+        return redirect("academy.video", cid=cid, sid=sid, vid=vid)
+      except:
+        messages.error(request, "There was an error while adding your comment!")
+        return redirect("academy.video", cid=cid, sid=sid, vid=vid)
+    else:
+        messages.error(request, "This field can not be empty!")
+        return redirect("academy.video.add_comment", cid=cid, sid=sid, vid=vid)
 
-    try:
-      Comment.objects.create(
-        sender=user,
-        video=video,
-        text=text,
-      )
-      messages.success(request, "Comment added! Will be approved soon!")
-      return redirect("academy.video", cid=cid, sid=sid, vid=vid)
-    except:
-      messages.error(request, "There was an error while adding your comment!")
-      return redirect("academy.video", cid=cid, sid=sid, vid=vid)
 
 
+@login_required(login_url="/account/login")
 def answers(request, cid, sid, vid, comId):
   course = Course.objects.get(id=cid)
   subtitle = CourseSubTitle.objects.get(id=sid)
@@ -261,6 +264,7 @@ def answers(request, cid, sid, vid, comId):
   return render(request, "academy/answers.html", context) 
 
 
+@login_required(login_url="/account/login")
 @csrf_exempt
 def add_answer(request, cid, sid, vid, comId):
 
