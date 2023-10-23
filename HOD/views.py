@@ -615,7 +615,6 @@ def add_course_video(request, courseId, subtitleId):
     title = request.POST.get("title")
     description = request.POST.get("description")
     video = request.FILES.get("video")
-    print(video)
     try:
       CourseVideo.objects.create(
         subtitle=subtitle,
